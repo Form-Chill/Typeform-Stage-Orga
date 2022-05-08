@@ -1,8 +1,5 @@
 <template>
 
-    <b style="font-size:5em">Cette page est en construction</b> <br/>
-
-<template>
     <div class="container">
       <div class="block">
         <h1 id="title">Cette page est en cours de construction !</h1>
@@ -23,6 +20,12 @@
 
 
 <style>
+
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat"),   url(./assets/Montserrat-Medium.ttf) format("truetype");}
+
+  
 body {
     background-color: #022C4F;
     font-family: "Montserrat";

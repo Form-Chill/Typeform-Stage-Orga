@@ -25,3 +25,14 @@ import Footer from "../components/Footer.vue";
     
     <Footer></Footer>
 </template>
+
+
+<style>
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+</style>
