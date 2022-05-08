@@ -1,11 +1,3 @@
-<script>
-    export default {
-
-    }
-
-</script>
-
-
 <template>
     <nav class="navbar">
         <div class="container">
@@ -16,10 +8,3 @@
 
     </nav>
 </template>
-
-<style>
-
-
-
-</style>
-
