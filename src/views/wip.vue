@@ -1,7 +1,6 @@
+<template>
 
-<script>
-
-</script>
+    <b style="font-size:5em">Cette page est en construction</b> <br/>
 
 <template>
     <div class="container">
