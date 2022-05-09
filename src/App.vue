@@ -1,14 +1,16 @@
 <script>
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
+import Carousel from "./components/Carousel.vue";
+import Avis from "./components/Avis.vue";
     export default {
-    components: { Navbar, Footer }
+    components: { Navbar, Footer,Carousel,Avis }
 }
 
 </script>
 
-
 <template>
+
 <Navbar></Navbar>
     <div class="container">
       <div id="text">
@@ -22,6 +24,12 @@ import Footer from "./components/Footer.vue";
       </div>
         <img src="./assets/imgAccueil.jpg" alt="image Accueil"/>
     </div>
+
+    <Carousel></Carousel>
+
+    <Avis></Avis>
+
+    <Avis></Avis>
     
     <Footer></Footer>
     
@@ -29,6 +37,9 @@ import Footer from "./components/Footer.vue";
 
 
 <style>
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat"),   url(./assets/Montserrat-Medium.ttf) format("truetype");}
 
 .container {
     display: flex;
