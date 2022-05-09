@@ -6,8 +6,8 @@
 
 <template>
     <footer>
-        <img src="../assets/logo.png"/>
-        <h5>Projet réalisé dans le cadre de notre stage de fin d'études - Tous droits réservés - 2022</h5>
+        <img id="logo" src="../assets/logo.png"/> <br/> <br/>
+        <h5 class="text-light">Projet réalisé dans le cadre de notre stage de fin d'études - Tous droits réservés - 2022</h5>
     </footer>
 
 </template>
@@ -18,11 +18,13 @@ footer {
     background-color: #022C4F;
     color: #fff;
     text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
 }
 
-img {
-    height: 125px;
-    width: 150px;
+#logo {
+    height: 8%;
+    width: 8%;
 }
 
 

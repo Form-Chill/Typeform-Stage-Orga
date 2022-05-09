@@ -1,3 +1,11 @@
+<script>
+
+
+
+</script>
+
+
+
 <template>
 <div id="avis">
 
@@ -42,8 +50,5 @@
   border-radius: 50%;
   display: inline-block;
 }
-
-
-
 
 </style>
