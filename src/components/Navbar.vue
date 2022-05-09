@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar navbar-expand-lg navbar-light bg-light pt-3">
       <div class="container-fluid">
-      <img class="logo pb-2" width="100" height="90" src="./assets/logo.png">
+      <img class="logo pb-2" width="100" height="90" src="../assets/logo.png">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
