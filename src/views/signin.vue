@@ -10,19 +10,30 @@ components: { Navbar, Footer }
 
 
 <template>
+<br>
 <h1 style="text-align:center"> Inscription</h1>
 
-    <form>
-        <div class="mb-3">
-            <label for="InputEmail" class="form-label">Adresse Email</label>
-            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
+    <form class="needs-validation" novalidate>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Adresse Email" required>
+            <label for="InputEmail">Adresse Email</label>
+            <div class="invalid-feedback">
+                L'adresse Email est incorrecte.
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="InputPassword" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="InputPassword">
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="InputPassword" placeholder="Mot de passe" required>
+            <label for="InputPassword">Mot de passe</label>
+            <div class="invalid-feedback">
+                Le mot de passe est invalide.
+            </div>
         </div>
-       
-        <button type="submit" class="btn btn-success" >Se connecter</button>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Accepter les CGU</label>
+        </div>
+        <button type="submit" class="btn btn-success" >S'inscrire</button>  
+
     </form>
 
 </template>

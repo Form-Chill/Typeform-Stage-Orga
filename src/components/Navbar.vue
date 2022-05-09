@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar navbar-expand-lg navbar-light bg-light pt-3">
       <div class="container-fluid">
-     <router-link to="/"> <img class="logo pb-2" width="100" height="90" src="../assets/logo.png"></router-link>
+     <router-link to="/"> <img class="logo pb-2" width="70" height="65" src="../assets/logo.png"></router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -34,10 +34,5 @@
   font-family: "Montserrat";
   font-size: large;
 }
-p {
-  color: black;
-}
-h5{
-  color: black;
-}
+
 </style>

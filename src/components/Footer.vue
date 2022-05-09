@@ -7,7 +7,7 @@
 <template>
     <footer>
         <img id="logo" src="../assets/logo.png"/> <br/> <br/>
-        <h5 class="text-light">Projet réalisé dans le cadre de notre stage de fin d'études - Tous droits réservés - 2022</h5>
+        <h6 class="text-light">Projet réalisé dans le cadre de notre stage de fin d'études - Tous droits réservés - 2022</h6>
     </footer>
 
 </template>

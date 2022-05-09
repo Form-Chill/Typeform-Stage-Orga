@@ -25,7 +25,7 @@ html{
                                               
 }
 body {
-    /* background-color: #022C4F; */
+    background-color: #022C4F;
     font-family: "Montserrat";
 }
 
