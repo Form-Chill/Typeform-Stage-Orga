@@ -11,6 +11,9 @@ export default {
 
 <template>
 
+
+<h1 style="text-align:center">Connexion</h1>
+
     <form>
         <div class="mb-3">
             <label for="InputEmail" class="form-label">Adresse Email</label>
@@ -24,10 +27,8 @@ export default {
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Se souvenir de mes identifiants</label>
         </div>
-        <button type="submit" class="btn btn-success" disabled>Se connecter</button>
+        <button type="submit" class="btn btn-success" >Se connecter</button>
     </form>
-
-<Footer></Footer>
 </template>
 
 

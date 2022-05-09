@@ -10,30 +10,9 @@ import Avis from "./components/Avis.vue";
 </script>
 
 <template>
-
-<Navbar></Navbar>
-<br>
-    <div id="container">
-      <div id="text">
-        <h1 class="display-2 bold">Demandez l'avis de vos clients avec style.</h1>
-        <h5>
-            Créez simplement des sondages polyvalents et accessibles à tous. Form&Chill est un formidable outil vous permettant de booster votre productivité.
-        </h5>
-        <button id="pollCreate" type="button" class="btn btn-primary shadow-sm">
-            Créer un sondage
-        </button>
-      </div>
-        <img src="./assets/imgAccueil.jpg" alt="image Accueil" id="imgAccueil"/>
-    </div>
-
-    <Carousel></Carousel>
-
-    <Avis></Avis>
-
-    <Avis></Avis>
-    
-    <Footer></Footer>
-    
+  <Navbar></Navbar>
+  <router-view></router-view>
+  <Footer></Footer>
 </template>
 
 
@@ -48,6 +27,10 @@ body {
   margin-right: 5%;
 }
 
+*{
+  font-family: "Montserrat";
+}
+
 @font-face {
   font-family: "Montserrat";
   src: local("Montserrat"),   url(./assets/Montserrat-Medium.ttf) format("truetype");}
@@ -59,16 +42,4 @@ body {
     margin-left: 5%;
     margin-right: 5%;
 }
-
-#pollCreate {
-  background-color: #022C4F !important;
-  border: #022C4F !important;
-  
-}
-
-#imgAccueil{
-  width: 50%;
-  height: 50%;
-}
-
 </style>

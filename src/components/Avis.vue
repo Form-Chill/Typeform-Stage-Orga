@@ -9,18 +9,18 @@
 <template>
 <div id="avis">
 
-<div class="card w-75 blue text-light ">
+<div class="card w-75 blue">
   <div class="card-body">
       <div class="row">
 
     <span class="dot col-2"></span>
-    <h5 class="card-title col">Ilié</h5>
+    <h5 class="card-title col text-light ">Ilié</h5>
 
     </div>
 
-    <div class="card w-100 blue-bis text-light">
+    <div class="card w-100 blue-bis ">
         <div class="card-body">
-            <p class="card-text">Bootstrap c de la merde</p>
+            <p class="card-text text-light ">Bonjour</p>
         </div>
     </div>
 

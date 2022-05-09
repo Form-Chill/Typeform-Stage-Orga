@@ -12,7 +12,7 @@
       </div>
 
       <div id="img" class="block">
-        <img id="wip" src="./assets/imgWip.png" alt="image wip"/>
+        <img id="wip" src="../assets/imgWip.png" alt="image wip"/>
       </div>
 
     </div>
@@ -20,12 +20,10 @@
 
 
 <style>
-
-@font-face {
-  font-family: "Montserrat";
-  src: local("Montserrat"),   url(./assets/Montserrat-Medium.ttf) format("truetype");}
-
-  
+html{
+  height: 100%;
+                                              
+}
 body {
     /* background-color: #022C4F; */
     font-family: "Montserrat";
