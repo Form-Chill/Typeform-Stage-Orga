@@ -10,10 +10,14 @@ export default {
 
 
 <template>
-<img src="../assets/Icon.png" alt="Icone" width="250" height="250"/>
+<Navbar></Navbar>
+<br>
+<img class="rounded mx-auto d-block" src="../assets/Icon.png" alt="Icone"/>
+<br>
 <h1 style="text-align:center" class="fw-bold">Connexion</h1>
+<br>
 
-    <form class="needs-validation" novalidate>
+    <form class="needs-validation container-fluid px-5" novalidate>
           <div class="form-floating mb-3">
             <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Adresse Email" required>
             <label for="InputEmail">Adresse Email</label>
@@ -32,9 +36,12 @@ export default {
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Se souvenir de mes identifiants</label>
         </div>
-        <button type="submit" class="btn btn-success" >Se connecter</button>  
+        <button type="submit" class="btn btn-success text-center" >Se connecter</button>  
 
     </form>
+    <br>
+    <Footer></Footer>
+    
 </template>
 
 

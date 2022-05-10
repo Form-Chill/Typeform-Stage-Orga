@@ -10,6 +10,7 @@ import Avis from "../components/Avis.vue";
 </script>
 
 <template>
+<Navbar></Navbar>
     <div id="container">
       <div id="text">
         <h1 class="display-2 fw-bold">Demandez l'avis de vos clients avec style.</h1>
@@ -26,14 +27,25 @@ import Avis from "../components/Avis.vue";
       </div>
         <img src="../assets/imgAccueil.jpg" alt="image Accueil" id="imgAccueil"/>
     </div>
-
+    <br>
     <Carousel></Carousel>
-    <h1>Texte de presentation du produit (WIP)</h1>
-
-
-    <h1 style="text-align: center;">Ils nous recommandent(nous sommes si forts lol)</h1>
-    <Avis ></Avis>
+    <br>
+    <div class="container">
+      <img class="rounded" src="../assets/imgAccueil1.jpg" width="400" height="400"/>
+        <h3 class="fw-bold">Un produit simple à prendre en main.</h3>
+        <p>
+          Form&Chill est un produit capable d'être utilisé par n'importe qui. Nous avons conçu un produit ergonomique et polyvalent pouvant être utilisé par tous.
+      </p>
+      
+    </div>
+    
+  <br>
+    <h3 style="text-align: center;">Ils nous recommandent(nous sommes si forts lol)</h3>
     <Avis></Avis>
+    <br>
+    <Avis></Avis>
+  <br>
+    <Footer></Footer>
 </template>
 
 
@@ -55,6 +67,7 @@ import Avis from "../components/Avis.vue";
     padding-top: 1%;
   width: 45%;
   height: 45%;
+  margin-right: -2%;
 }
 
 

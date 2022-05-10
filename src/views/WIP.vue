@@ -1,14 +1,17 @@
 <template>
 
-    <div class="container">
-      <div class="block">
-        <h1 id="title">Cette page est en cours de construction !</h1>
-        <p id="text">
+    <div class="container start-50">
+      <div class="block text-white">
+        <h1 id="title" class="" >Cette page est en cours de construction !</h1>
+        <p id="text" class="text-white">
             Notre site web est encore en bêta, <br> vous ne devriez pas être là à nous observer en train de travailler !
         </p>
-        <button type="button" class="btn btn-light btn-lg">
+        <router-link to="/">
+          <button type="button" class="btn btn-light btn-lg">
             Retour à l'accueil
         </button>
+        </router-link>
+        
       </div>
 
       <div id="img" class="block">
@@ -20,10 +23,6 @@
 
 
 <style>
-html{
-  height: 100%;
-                                              
-}
 body {
     background-color: #022C4F;
     font-family: "Montserrat";
@@ -37,7 +36,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid 1px #fff;
+  /* border: solid 1px #fff; */
   margin: 0 auto;
 }
 

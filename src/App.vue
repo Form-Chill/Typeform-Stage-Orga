@@ -4,15 +4,13 @@ import Footer from "./components/Footer.vue";
 import Carousel from "./components/Carousel.vue";
 import Avis from "./components/Avis.vue";
     export default {
-    components: { Navbar, Footer,Carousel,Avis }
+    components: { Navbar, Footer, Carousel, Avis }
 }
 
 </script>
 
 <template>
-  <Navbar></Navbar>
   <router-view></router-view>
-  <Footer></Footer>
 </template>
 
 

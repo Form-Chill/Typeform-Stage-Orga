@@ -10,10 +10,12 @@ components: { Navbar, Footer }
 
 
 <template>
+<Navbar></Navbar>
 <br>
-<h1 style="text-align:center"> Inscription</h1>
-
-    <form class="needs-validation" novalidate>
+<img class="rounded mx-auto d-block" src="../assets/Icon.png" alt="Icone"/>
+<h1 style="text-align:center" class="fw-bold"> Inscription</h1>
+<br>
+    <form class="needs-validation container-fluid px-5" novalidate>
           <div class="form-floating mb-3">
             <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Adresse Email" required>
             <label for="InputEmail">Adresse Email</label>
@@ -35,7 +37,9 @@ components: { Navbar, Footer }
         <button type="submit" class="btn btn-success" >S'inscrire</button>  
 
     </form>
+    <br>
 
+<Footer></Footer>
 </template>
 
 
