@@ -11,6 +11,7 @@ import Avis from "../components/Avis.vue";
 
 <template>
 <Navbar></Navbar>
+ 
     <div id="container">
       <div id="text">
         <h1 class="display-2 fw-bold">Demandez l'avis de vos clients avec style.</h1>
@@ -30,21 +31,26 @@ import Avis from "../components/Avis.vue";
     <br>
     <Carousel></Carousel>
     <br>
-    <div class="container">
-      <img class="rounded" src="../assets/imgAccueil1.jpg" width="400" height="400"/>
-        <h3 class="fw-bold">Un produit simple à prendre en main.</h3>
-        <p>
-          Form&Chill est un produit capable d'être utilisé par n'importe qui. Nous avons conçu un produit ergonomique et polyvalent pouvant être utilisé par tous.
-      </p>
-      
-    </div>
     
-  <br>
+    <div id="container">
+      <div class="row"> 
+        <div class="col-sm-12 col-md-6">  
+          <h3 class="fw-bold">Un produit simple à prendre en main.</h3><br>
+          <p>Form&Chill est un produit capable d'être utilisé par n'importe qui. Nous avons conçu un produit ergonomique et polyvalent pouvant être utilisé par tous.</p>
+        </div>
+        <div class=" col-sm-12 col-md-6">  
+          <img class="rounded img-fluid center"  src="../assets/imgAccueil1.jpg" />
+        </div>
+      </div>
+    </div>
+    <br>
+  
     <h3 style="text-align: center;">Ils nous recommandent(nous sommes si forts lol)</h3>
     <Avis></Avis>
     <br>
     <Avis></Avis>
-  <br>
+    <br>
+
     <Footer></Footer>
 </template>
 
@@ -68,6 +74,12 @@ import Avis from "../components/Avis.vue";
   width: 45%;
   height: 45%;
   margin-right: -2%;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 

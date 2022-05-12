@@ -15,10 +15,12 @@ import Avis from "./components/Avis.vue";
 
 
 <style>
-body {
-  background-color: #fff !important;
-  color: #022C4F !important;
+
+html{
+  height: 100%;
+  width: 100%;
 }
+
 
 #text {
   color:#022C4F !important;
@@ -40,4 +42,13 @@ body {
     margin-left: 5%;
     margin-right: 5%;
 }
+
+.blue{
+    background-color: #022C4F;
+}
+
+.blue-bis{
+    background-color: #627a8f;
+}
+
 </style>

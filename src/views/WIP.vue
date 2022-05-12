@@ -1,9 +1,8 @@
 <template>
-
     <div class="container start-50">
       <div class="block text-white">
-        <h1 id="title" class="" >Cette page est en cours de construction !</h1>
-        <p id="text" class="text-white">
+        <h1 id="title">Cette page est en cours de construction !</h1>
+        <p id="text" class="text-light">
             Notre site web est encore en bêta, <br> vous ne devriez pas être là à nous observer en train de travailler !
         </p>
         <router-link to="/">
@@ -23,14 +22,6 @@
 
 
 <style>
-body {
-    background-color: #022C4F;
-    font-family: "Montserrat";
-}
-
-#title, #text {
-  color: #ffffff;
-}
 
 .container {
   display: flex;
