@@ -10,7 +10,7 @@
      <router-link to="/"> <a id="titre" class="text-decoration-none navbar-brand text-white fw-bold" href="#">
        <img class="logo" width="65" height="55" src="../assets/Icon.png">
        Form&Chill
-     </a></router-link>
+      </a></router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -37,14 +37,9 @@
   </template>
 
 <style>
-@font-face {
-  font-family: "Montserrat";
-  src: local("Montserrat"),   url(../assets/Montserrat-Medium.ttf) format("truetype");}
-
 .navbar {
   background-color: #022C4F !important;
   font-family: "Montserrat";
   /* font-size: large; */
 }
-
 </style>

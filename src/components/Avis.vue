@@ -20,7 +20,7 @@
 
     <div class="card w-100 blue-bis ">
         <div class="card-body">
-            <p class="card-text text-light ">Bonjour</p>
+            <p class="card-text text-light ">Bonjour, ceci est un avis</p>
         </div>
     </div>
 
@@ -34,21 +34,18 @@
 
 <style>
 
-.blue{
-    background-color: #022C4F;
-}
-
-.blue-bis{
-    background-color: #627a8f;
-}
-
-
 .dot {
   height: 4em;
   width: 4em;
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
+}
+
+#avis{
+margin-left: 20%;
+margin-right: auto;
+
 }
 
 </style>
