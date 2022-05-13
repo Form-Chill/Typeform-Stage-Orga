@@ -7,16 +7,9 @@
 <template>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-<<<<<<< Updated upstream
-     <router-link to="/"> <a id="titre" class="text-decoration-none navbar-brand text-white fw-bold" href="#">
-       <img class="logo" width="65" height="55" src="../assets/Icon.png">
-       Form&Chill
-      </a></router-link>
-=======
      <router-link to="/"> <a id="titre" class="text-decoration-none navbar-brand text-white fw-bold translate-middle" href="#">
        <img class="logo" width="80" height="70" src="../assets/logo.png">
      </a></router-link>
->>>>>>> Stashed changes
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
