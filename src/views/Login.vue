@@ -2,6 +2,8 @@
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import { defineComponent } from "vue";
+import { getAuth, signInWithEmailAndPassword } from "@firebase/auth";
+import router from "../router";
 
 
 export default {
@@ -29,7 +31,19 @@ export default {
         })
       },
       login(){
-          
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, this.form.email, this.form.password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            
+            router.push("/");
+            // ...
+        })
+        .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+  });
       }
     }
 }
@@ -75,5 +89,8 @@ export default {
 
 <style>
 
+form {
+    margin-bottom: auto;
+}
 
 </style>

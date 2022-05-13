@@ -26,7 +26,7 @@ import Avis from "../components/Avis.vue";
         </button>
         </router-link>
       </div>
-        <img src="../assets/imgAccueil.jpg" alt="image Accueil" id="imgAccueil"/>
+        <img src="../assets/imgAccueil.jpg" alt="image Accueil" id="imgAccueil" class="img-fluid"/>
     </div>
     <br>
     <Carousel></Carousel>
@@ -56,6 +56,10 @@ import Avis from "../components/Avis.vue";
 
 
 <style>
+
+#text {
+  margin-right: 10%;
+}
 
 .container {
     display: flex;
