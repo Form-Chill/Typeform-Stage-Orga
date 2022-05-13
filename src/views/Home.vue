@@ -26,7 +26,9 @@ import Avis from "../components/Avis.vue";
         </button>
         </router-link>
       </div>
-        <img src="../assets/imgAccueil.jpg" alt="image Accueil" id="imgAccueil" width="80" height="70"/>
+        <div class="col-sm-12 col-md-8">
+         <img src="../assets/imgAccueil.jpg" class="rounded img-fluid center" alt="image Accueil" id="imgAccueil"/>
+        </div>
     </div>
     <br>
     <Carousel></Carousel>
@@ -47,7 +49,7 @@ Phasellus ullamcorper rhoncus arcu, et rhoncus velit porta et.
           </p>
         </div>
         <div class=" col-sm-12 col-md-6">  
-          <img class="rounded img-fluid center"  src="../assets/imgAccueil1.jpg" />
+          <img class="rounded img-fluid center" src="../assets/imgAccueil1.jpg" />
         </div>
       </div>
     </div>
