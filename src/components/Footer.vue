@@ -6,7 +6,7 @@
 
 <template>
     <footer>
-        <img id="logo" src="../assets/logo.png"/> <br/> <br/>
+        <img id="logo" width="80" height="70" src="../assets/logo.png"/> <br/> <br/>
         <p class="text-light">Projet réalisé dans le cadre de notre stage de fin d'études - Tous droits réservés - 2022</p>
     </footer>
 
@@ -22,10 +22,6 @@ footer {
     padding-bottom: 1%;
 }
 
-#logo {
-    height: 6%;
-    width: 6%;
-}
 
 
 
