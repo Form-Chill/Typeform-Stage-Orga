@@ -13,7 +13,9 @@
   <div class="card-body">
       <div class="row">
 
-    <span class="dot col-2"></span>
+    <span class="dot col-2 position-absolute top-0 start-0 translate-middle">
+     <img src="../assets/illie.png" class="rounded-circle" width="70" height="70" >
+    </span>
     <h5 class="card-title col text-light ">Ilié</h5>
 
     </div>
@@ -37,15 +39,16 @@
 .dot {
   height: 4em;
   width: 4em;
-  background-color: #bbb;
+  display: hidden;
   border-radius: 50%;
   display: inline-block;
 }
 
 #avis{
-margin-left: 20%;
-margin-right: auto;
-
+display: flex;
+text-align: center;
+justify-content: center;
+padding-bottom: 2%;
 }
 
 </style>
