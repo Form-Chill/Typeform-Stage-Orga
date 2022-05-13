@@ -86,4 +86,9 @@ export default {
     margin-right: 3%;
 }
 
+#groupCards {
+  margin-bottom: 7%;
+}
+
+
 </style>
