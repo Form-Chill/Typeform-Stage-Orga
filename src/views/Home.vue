@@ -19,7 +19,7 @@ import Avis from "../components/Avis.vue";
         <h6>
             Créez simplement des sondages polyvalents et accessibles à tous. Form&Chill est un formidable outil vous permettant de booster votre productivité.
         </h6>
-        
+          
         <router-link to="/sondages">
         <button id="pollCreate" type="button" class="btn btn-primary btn-lg shadow-sm">
             Créer un sondage

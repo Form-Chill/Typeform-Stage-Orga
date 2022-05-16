@@ -29,6 +29,7 @@
   align-items: center;
   /* border: solid 1px #fff; */
   margin: 0 auto;
+  background-color: #022C4F;
 }
 
 #wip {
