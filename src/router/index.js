@@ -7,6 +7,7 @@ import Sondages from "@/views/Sondages.vue";
 import About from "@/views/About.vue";
 import WIP from "@/views/WIP.vue";
 import NotFound from "@/views/NotFound.vue";
+import Dashboard from "@/views/Dashboard.vue"
 
 
 
@@ -39,6 +40,11 @@ const routes = [{
     path: "/wip",
     name: "WIP",
     component: WIP,
+},
+{
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Dashboard,
 },
 {
     path: "/:catchAll(.*)",

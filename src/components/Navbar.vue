@@ -1,5 +1,22 @@
 <script>
+import { onMounted, ref } from "vue";
+import { getAuth, onAuthStateChanged, signOut } from "@firebase/auth";
 
+let auth;
+
+
+export default {
+  data() {
+    return {
+      logged: ref(false),
+    }
+  },
+  methods: {
+    changeNavbar() {
+      
+    }
+  }
+}
 
 </script>
 
@@ -27,8 +44,9 @@
           </ul>
           <form class="d-flex">
             
-           <router-link to="/login"><button class="btn btn-outline-light me-2" type="submit">Connexion</button></router-link>
-           <router-link to="/signin"><button class="btn btn-success" type="submit">Inscription</button></router-link>
+           <router-link to="/login"><button class="btn btn-outline-light me-2">Connexion</button></router-link>
+           <router-link to="/signin"><button class="btn btn-success" >Inscription</button></router-link>
+           <button class="btn btn-danger" v-if="logged" >Se déconnecter</button>
           </form>
         </div>
       </div>

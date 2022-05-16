@@ -1,16 +1,21 @@
 <script>
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
+import { getAuth, createUserWithEmailAndPassword } from "@firebase/auth";
+import router from "../router";
 
 export default {
     components: { Navbar, Footer },
     data() {
         return {
            form: {
+               name: '',
+               firstName: '',
+               birthdayDate: '',
                email: '',
                password: '',
                CGU: '',
-               Sexe: [],
+               Sex: [],
             }, 
         }
     },
@@ -27,8 +32,20 @@ export default {
                 this.show = true
         })
       },
-      login(){
-          
+      register(){
+          createUserWithEmailAndPassword(getAuth(), this.form.email, this.form.password)
+            .then((data) => {
+                console.log("Inscription réussie !");
+                router.push('/Dashboard'); //Rediriger sur le dashboard
+            })
+            .catch((error) => {
+                console.log(error.code);
+                alert(error.message);
+            })
+      },
+
+      signInWithGoogle(){
+
       }
     }
 }
@@ -44,18 +61,18 @@ export default {
 <br>
     <form class="needs-validation container-fluid px-5" novalidate>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="InputPassword" placeholder="Nom" required>
-            <label for="InputPassword">Nom</label>
+            <input type="string" class="form-control" id="InputName" placeholder="Nom" required>
+            <label for="InputName">Nom</label>
         </div>
 
         <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="InputPassword" placeholder="Prénom" required>
-            <label for="InputPassword">Prénom</label>
+            <input type="string" class="form-control" id="InputFirstname" placeholder="Prénom" required>
+            <label for="InputFirstname">Prénom</label>
         </div>
 
         <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="InputPassword" placeholder="Pseudo" required>
-            <label for="InputPassword">Pseudo</label>
+            <input type="string" class="form-control" id="InputNickname" placeholder="Pseudo" required>
+            <label for="InputNickname">Pseudo</label>
         </div>
 
           <div class="form-floating mb-3">
@@ -88,7 +105,8 @@ export default {
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Accepter les CGU</label>
         </div>
-        <button type="submit" class="btn btn-success" >S'inscrire</button>  
+        <button type="submit" @click="register" class="btn btn-success" >S'inscrire</button>
+        <button type="submit" @click="signInWithGoogle" class="btn btn-success">S'inscrire avec Google</button>  
 
     </form>
     <br>
