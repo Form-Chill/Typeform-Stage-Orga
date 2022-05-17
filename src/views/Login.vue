@@ -2,8 +2,8 @@
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import { defineComponent, ref } from "vue";
-import { getAuth, signInWithEmailAndPassword } from "@firebase/auth";
-import router from "../router";
+import { getAuth,signOut, signInWithEmailAndPassword } from "@firebase/auth";
+import router from "../router/";
 
 export default {
     components: { Navbar, Footer },
@@ -18,20 +18,34 @@ export default {
         }
     },
     methods: {
+        test(){
+            router.push("/about");
+        },
+        testDeco(){
+            signOut(getAuth()).then(() => {
+                console.log("Deconnection OK");
+            }).catch((error) => {
+                console.log("Deconnection PAS OK " + error.message);
+            });   
+        },
         login(){
-            console.log(this.form.email);
-            console.log(this.form.password);
+            console.log("Ceci est l'email " + this.form.email);
+            console.log("Ceci est le mot de passe "  + this.form.password);
             const auth = getAuth();
-            signInWithEmailAndPassword(auth, this.form.email, this.form.password)
+            signInWithEmailAndPassword(getAuth(), this.form.email, this.form.password)
             .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            router.push("/");
+              //  alert("wouhou1");
+                console.log("Connecté:")
+                const user = userCredential.user;
+                router.push("/about");
+            // Signed in  
             })
             .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            switch(errorCode) {
+               // alert("wouhou2");
+                router.push("/about");
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                switch(errorCode) {
                         case "auth/invalid-email":
                             this.errMessage = "Adresse email invalide !";
                             break;
@@ -45,15 +59,11 @@ export default {
                             this.errMessage = "Email et/ou mot de passe incorrect !";
                             break;
                         }
-                });
+            });
 
         }
     }
 };
-
-
-
-
 </script>
 
 
@@ -65,7 +75,7 @@ export default {
 <h1 style="text-align:center" class="fw-bold">Connexion</h1>
 <br>
 
-    <form class="needs-validation container-fluid px-5" novalidate>
+    <form class="needs-validation container-fluid px-5" @submit.prevent="" novalidate>
           <div class="form-floating mb-3">
             <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Adresse Email" v-model="form.email" required>
             <label for="InputEmail">Adresse Email</label>
@@ -79,8 +89,10 @@ export default {
             <label class="form-check-label" for="exampleCheck1">Se souvenir de mes identifiants</label>
         </div>
         <button @click="login" class="btn btn-success text-center" >Se connecter</button>  
-        <div v-if="errorMessage" class="invalid-feedback">
-            {{errorMessage}}
+        <button @click="test" class="btn btn-success text-center" >test</button>  
+        <button @click="testDeco" class="btn btn-success text-center" >test2</button>  
+        <div v-if="true" class="invalid-feedback">
+            {{errMessage}}
         </div>
     </form>
     <br>

@@ -12,24 +12,43 @@ import Avis from "../components/Avis.vue";
 <template>
 <Navbar></Navbar>
  
-    <div id="container" class="pb-5">
-      <div id="text">
-        <h1 class="display-2 fw-bold">Demandez l'avis de vos clients avec style.</h1>
-        
-        <h6>
+
+     <div id="container">
+
+       <div class="row"> 
+
+        <div class="col-sm-12 col-md-8">  
+           <h1 class="display-2 fw-bold">Demandez l'avis de vos clients avec style.</h1><br>
+            <h6>
             Créez simplement des sondages polyvalents et accessibles à tous. Form&Chill est un formidable outil vous permettant de booster votre productivité.
-        </h6>
-          
+            </h6><br>
+
         <router-link to="/sondages">
         <button id="pollCreate" type="button" class="btn btn-primary btn-lg shadow-sm">
             Créer un sondage
         </button>
         </router-link>
-      </div>
-        <div class="col-sm-12 col-md-8">
-         <img src="../assets/imgAccueil.jpg" class="rounded img-fluid center" alt="image Accueil" id="imgAccueil"/>
+        
         </div>
+
+        <div class=" col-sm-12 col-md-4">  
+          <img class="rounded img-fluid center" src="../assets/imgAccueil.jpg" alt="image Accueil" />
+        </div>
+         
+      </div>
+      
+        
     </div>
+
+
+
+
+
+
+
+
+
+
     <br>
     <Carousel></Carousel>
     <br>
