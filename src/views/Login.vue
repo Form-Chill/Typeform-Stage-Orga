@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import { defineComponent, ref } from "vue";
 import { getAuth,signOut, signInWithEmailAndPassword } from "@firebase/auth";
-import router from "../router/";
+import router from "../router";
 
 export default {
     components: { Navbar, Footer },
@@ -19,32 +19,24 @@ export default {
     },
     methods: {
         test(){
-            router.push("/about");
-        },
-        testDeco(){
-            signOut(getAuth()).then(() => {
-                console.log("Deconnection OK");
-            }).catch((error) => {
-                console.log("Deconnection PAS OK " + error.message);
-            });   
+            router.push("/");
         },
         login(){
             console.log("Ceci est l'email " + this.form.email);
             console.log("Ceci est le mot de passe "  + this.form.password);
-            const auth = getAuth();
+
             signInWithEmailAndPassword(getAuth(), this.form.email, this.form.password)
             .then((userCredential) => {
               //  alert("wouhou1");
-                console.log("Connecté:")
                 const user = userCredential.user;
-                router.push("/about");
+                console.log(user)
+                router.push("/about")  
+                 
             // Signed in  
             })
             .catch((error) => {
-               // alert("wouhou2");
-                router.push("/about");
                 const errorCode = error.code;
-                const errorMessage = error.message;
+                //const errorMessage = error.message;
                 switch(errorCode) {
                         case "auth/invalid-email":
                             this.errMessage = "Adresse email invalide !";
@@ -58,7 +50,7 @@ export default {
                         default:
                             this.errMessage = "Email et/ou mot de passe incorrect !";
                             break;
-                        }
+                }
             });
 
         }
@@ -69,9 +61,11 @@ export default {
 
 <template>
 <Navbar></Navbar>
+<div id="ConnexionUI">
 <br>
+
 <img class="rounded mx-auto d-block" src="../assets/Icon.png" alt="Icone"/>
-<br>
+
 <h1 style="text-align:center" class="fw-bold">Connexion</h1>
 <br>
 
@@ -90,12 +84,12 @@ export default {
         </div>
         <button @click="login" class="btn btn-success text-center" >Se connecter</button>  
         <button @click="test" class="btn btn-success text-center" >test</button>  
-        <button @click="testDeco" class="btn btn-success text-center" >test2</button>  
-        <div v-if="true" class="invalid-feedback">
-            {{errMessage}}
-        </div>
+
+        <p > {{this.errMessage}}</p>
     </form>
     <br>
+
+    </div>
     <Footer></Footer>
     
 </template>
@@ -103,8 +97,9 @@ export default {
 
 <style>
 
-form {
-    margin-bottom: auto;
+#ConnexionUI{
+    padding-top: 5%;
+    padding-bottom: 15%;
 }
 
 </style>

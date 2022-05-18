@@ -1,19 +1,43 @@
-<script>
+<script >
 import { onMounted, ref } from "vue";
 import { getAuth, onAuthStateChanged, signOut } from "@firebase/auth";
 
-let auth;
-
+  var auth;
 
 export default {
+
+
+
   data() {
     return {
-      logged: ref(false),
+       loggedIn: false,
     }
   },
+
+  created(){
+     auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user)
+        this.loggedIn = true; 
+        else
+        this.loggedIn = false; 
+
+    });
+  },
+
   methods: {
-    changeNavbar() {
-      
+
+    seDeconnecter(){
+      signOut(auth).then(() => {
+        this.loggedIn =  false,
+        router.push("/");})
+      .catch((error) => {
+        console.log(error);
+      })
+    },
+
+    testConnexion(){
+      alert(this.loggedIn);
     }
   }
 }
@@ -21,7 +45,8 @@ export default {
 </script>
 
 
-<template>
+  <template>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
      <router-link to="/"> <a id="titre" class="text-decoration-none navbar-brand text-white fw-bold translate-middle" href="#">
@@ -35,19 +60,27 @@ export default {
             <li class="nav-item">
               <router-link to="/" class="nav-link active text-light ps-4">Accueil</router-link>
             </li>
+
+            <li class="nav-item" v-if="loggedIn">
+              <router-link to="/Dashboard" class="nav-link active text-light ps-4">Tableau de bord</router-link>
+            </li>
             <li class="nav-item">
-              <router-link to="/wip" class="nav-link active text-light ps-4">Sondages</router-link>
+              <router-link to="/sondages" class="nav-link active text-light ps-4">Sondages</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/about" class="nav-link active text-light  ps-4">A propos</router-link>
             </li>
           </ul>
-          <form class="d-flex">
+         
             
-           <router-link to="/login"><button class="btn btn-outline-light me-2">Connexion</button></router-link>
-           <router-link to="/signin"><button class="btn btn-success" >Inscription</button></router-link>
-           <button class="btn btn-danger" v-if="logged" >Se déconnecter</button>
-          </form>
+            <div v-if="loggedIn" >
+             <router-link to="/"><button class="btn btn-danger"  @click="seDeconnecter">Se déconnecter</button></router-link>
+            </div>
+            <div v-else>
+              <router-link to="/login"><button class="btn btn-outline-light me-2" >Connexion</button></router-link>
+              <router-link to="/signin"><button class="btn btn-success">Inscription</button></router-link>
+            </div>
+          <button @click="testConnexion" class="btn btn-success">test connexion</button>
         </div>
       </div>
   </nav>
