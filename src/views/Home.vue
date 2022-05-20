@@ -1,17 +1,16 @@
 <script>
-import Navbar from "../components/Navbar.vue";
-import Footer from "../components/Footer.vue";
+
 import Carousel from "../components/Carousel.vue";
 import Avis from "../components/Avis.vue";
-    export default {
-    components: { Navbar, Footer,Carousel,Avis }
+    
+  export default {
+    components: { Carousel, Avis, }
 }
 
 </script>
 
 <template>
-<Navbar></Navbar>
- 
+<Navbar/>
 
      <div id="container">
 

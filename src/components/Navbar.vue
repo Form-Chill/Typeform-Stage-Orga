@@ -80,7 +80,6 @@ export default {
               <router-link to="/login"><button class="btn btn-outline-light me-2" >Connexion</button></router-link>
               <router-link to="/signin"><button class="btn btn-success">Inscription</button></router-link>
             </div>
-          <button @click="testConnexion" class="btn btn-success">test connexion</button>
         </div>
       </div>
   </nav>
