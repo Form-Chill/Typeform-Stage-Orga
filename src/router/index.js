@@ -10,7 +10,8 @@ import NotFound from "@/views/NotFound.vue";
 import Dashboard from "@/views/Dashboard.vue";
 import Bookmarks from "@/views/Bookmarks.vue";
 import MyPolls from "@/views/MyPolls.vue";
-import Profile from "@/views/Profile.vue"
+import Profile from "@/views/Profile.vue";
+import PollCreate from "@/views/PollCreate.vue";
 
 
 
@@ -63,6 +64,11 @@ const routes = [{
     path: "/MyPolls",
     name: "MyPolls",
     component: MyPolls,
+},
+{
+    path: "/PollCreate",
+    name: "PollCreate",
+    component: PollCreate,
 },
 {
     path: "/:catchAll(.*)",
