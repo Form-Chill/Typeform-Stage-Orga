@@ -26,10 +26,6 @@ initializeApp(firebaseConfig);
 // export const auth = getAuth(app);
 // export const db = getFirestore(app);
 
-<<<<<<< HEAD
-createApp(App).use(router).mount('#app')
-import "bootstrap/dist/js/bootstrap.js" 
-=======
 const app = createApp(App);
 
 app.component('Navbar', Navbar);
@@ -38,4 +34,3 @@ app.use(router);
 app.mount('#app');
 
 import "bootstrap/dist/js/bootstrap.js" 
->>>>>>> 91f123c0eff12e778d99eb68994f80349c82433c
