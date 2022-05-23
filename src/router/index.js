@@ -36,6 +36,11 @@ const routes = [{
     component: Sondages,
 },
 {
+    path: "/pollcreate",
+    name: "PollCreate",
+    component: PollCreate,
+},
+{
     path: "/about",
     name: "About",
     component: About,
