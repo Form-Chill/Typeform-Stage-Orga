@@ -1,17 +1,9 @@
 <script>
-import Navbar from "../components/Navbar.vue";
-import Footer from "../components/Footer.vue";
-
-export default {
-  components: {Navbar, Footer}
-}
-
-
 </script>
 
 
 <template>
-<Navbar></Navbar>
+<Navbar />
     <br>
     <h2 style="text-align: center;">L'équipe de Form&Chill</h2>
     <br>
@@ -75,7 +67,7 @@ export default {
     </div>
     <br>
 
-    <Footer></Footer>
+    <Footer />
 </template>
 
 

@@ -1,13 +1,36 @@
-<template>
-    <h2>Rechercher un sondage : </h2>
+<script>
+    import Poll from "../components/Poll.vue";
 
-    <div class="input-group mb-3">
+    export default {
+        components:{ Poll}
+    }
+</script>
+
+
+<template>
+
+<Navbar />
+    <br>
+    <h2 class="fw-bold" style="text-align: center;">Rechercher un sondage : </h2>
+
+    <br>
+
+    <div class="input-group mb-3 px-5">
         <input type="text" class="form-control" placeholder="Rechercher un sondage" aria-label="Recipient's username" aria-describedby="button-addon2">
         <button class="btn btn-primary" type="button" id="button-addon2">Rechercher</button>
     </div>
-
+    <br>
     <!-- Afficher les sondages en fonction de la recherche -->
 
+    <div class="row">
+        <div class="col">
+            <Poll></Poll>
+        </div>
+        
+    </div>
+    
+    <br>
+<Footer />
 </template>
 
 <style>

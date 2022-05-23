@@ -2,7 +2,7 @@
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import { defineComponent, ref } from "vue";
-import { getAuth, signInWithEmailAndPassword } from "@firebase/auth";
+import { getAuth,signOut, signInWithEmailAndPassword } from "@firebase/auth";
 import router from "../router";
 
 export default {
@@ -18,20 +18,26 @@ export default {
         }
     },
     methods: {
-        login(){
-            console.log(this.form.email);
-            console.log(this.form.password);
-            const auth = getAuth();
-            signInWithEmailAndPassword(auth, this.form.email, this.form.password)
-            .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
+        test(){
             router.push("/");
+        },
+        login(){
+            console.log("Ceci est l'email " + this.form.email);
+            console.log("Ceci est le mot de passe "  + this.form.password);
+
+            signInWithEmailAndPassword(getAuth(), this.form.email, this.form.password)
+            .then((userCredential) => {
+              //  alert("wouhou1");
+                const user = userCredential.user;
+                console.log(user)
+                router.push("/about")  
+                 
+            // Signed in  
             })
             .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            switch(errorCode) {
+                const errorCode = error.code;
+                //const errorMessage = error.message;
+                switch(errorCode) {
                         case "auth/invalid-email":
                             this.errMessage = "Adresse email invalide !";
                             break;
@@ -44,28 +50,26 @@ export default {
                         default:
                             this.errMessage = "Email et/ou mot de passe incorrect !";
                             break;
-                        }
-                });
+                }
+            });
 
         }
     }
 };
-
-
-
-
 </script>
 
 
 <template>
 <Navbar></Navbar>
+<div id="ConnexionUI">
 <br>
+
 <img class="rounded mx-auto d-block" src="../assets/Icon.png" alt="Icone"/>
-<br>
+
 <h1 style="text-align:center" class="fw-bold">Connexion</h1>
 <br>
 
-    <form class="needs-validation container-fluid px-5" novalidate>
+    <form class="needs-validation container-fluid px-5" @submit.prevent="" novalidate>
           <div class="form-floating mb-3">
             <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Adresse Email" v-model="form.email" required>
             <label for="InputEmail">Adresse Email</label>
@@ -79,11 +83,13 @@ export default {
             <label class="form-check-label" for="exampleCheck1">Se souvenir de mes identifiants</label>
         </div>
         <button @click="login" class="btn btn-success text-center" >Se connecter</button>  
-        <div v-if="errorMessage" class="invalid-feedback">
-            {{errorMessage}}
-        </div>
+        <button @click="test" class="btn btn-success text-center" >test</button>  
+
+        <p > {{this.errMessage}}</p>
     </form>
     <br>
+
+    </div>
     <Footer></Footer>
     
 </template>
@@ -91,8 +97,9 @@ export default {
 
 <style>
 
-form {
-    margin-bottom: auto;
+#ConnexionUI{
+    padding-top: 5%;
+    padding-bottom: 15%;
 }
 
 </style>

@@ -7,7 +7,10 @@ import Sondages from "@/views/Sondages.vue";
 import About from "@/views/About.vue";
 import WIP from "@/views/WIP.vue";
 import NotFound from "@/views/NotFound.vue";
-import Dashboard from "@/views/Dashboard.vue"
+import Dashboard from "@/views/Dashboard.vue";
+import Bookmarks from "@/views/Bookmarks.vue";
+import MyPolls from "@/views/MyPolls.vue";
+import Profile from "@/views/Profile.vue"
 
 
 
@@ -45,6 +48,21 @@ const routes = [{
     path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
+},
+{
+    path: "/Profile",
+    name: "Profile",
+    component: Profile,
+},
+{
+    path: "/Bookmarks",
+    name: "Bookmarks",
+    component: Bookmarks,
+},
+{
+    path: "/MyPolls",
+    name: "MyPolls",
+    component: MyPolls,
 },
 {
     path: "/:catchAll(.*)",
