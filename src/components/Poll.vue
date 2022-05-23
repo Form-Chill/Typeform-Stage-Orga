@@ -1,8 +1,5 @@
 <script>
 
-import * as bootstrap from 'bootstrap';
-import { Popover } from 'bootstrap';
-
 var favourite = false;
 var url = '';
 
