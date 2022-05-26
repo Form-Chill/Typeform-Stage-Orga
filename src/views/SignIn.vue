@@ -2,6 +2,8 @@
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import { getAuth, createUserWithEmailAndPassword } from "@firebase/auth";
+import { db } from "../firebaseDb.js";
+import { collection, addDoc, doc,setDoc } from "firebase/firestore";
 import router from "../router";
 
 export default {
@@ -11,11 +13,8 @@ export default {
            form: {
                name: '',
                firstName: '',
-               birthdayDate: '',
                email: '',
-               password: '',
-               CGU: '',
-               Sex: [],
+               password: ''
             }, 
             errMessage:'', 
         }
@@ -33,14 +32,26 @@ export default {
                 this.show = true
         })
       },
+
       register(){
         //Vérifier éventuellement ici si le nom et prénom du formulaire sont conformes avec du regex 
         createUserWithEmailAndPassword(getAuth(), this.form.email, this.form.password)
         .then((data) => {
-            console.log("Inscription réussie !");
-            router.push('/about'); //Rediriger sur le dashboard
-        })
-        .catch((error) => {
+            var currentUser = getAuth().currentUser;
+            var uid = currentUser.uid;
+
+            const profile = {
+                name: this.form.name,
+                firstName: this.form.firstName,
+                email: this.form.email,
+                boomarks:[],
+                pollsCreated:[]
+            }
+
+            this.addUserData(uid,profile);
+            router.push('/dashboard');
+
+        }).catch((error) => {
            const errorCode = error.code;
             console.log(errorCode);
 
@@ -58,10 +69,15 @@ export default {
                     this.errMessage = "Email et/ou mot de passe incorrect !";
                 break;
             }
-        })
+        });
       },
 
-      signInWithGoogle(){
+    async addUserData(uid,profile ){
+        //alert(uid);
+        const docRef = await setDoc(doc(db, "users",uid), profile);
+        console.log("Inscription réussie !");
+      },
+        signInWithGoogle(){
 
       }
     }
@@ -80,13 +96,13 @@ export default {
 <br>
     <form class="needs-validation container-fluid px-5" @submit.prevent=""  novalidate>
         <div class="form-floating mb-3">
-            <input type="string" class="form-control" id="InputName" placeholder="Nom" required>
-            <label for="InputName">Nom (WIP) </label>
+            <input type="string" class="form-control" id="InputName" placeholder="Nom" v-model="this.form.name" required>
+            <label for="InputName">Nom</label>
         </div>
 
         <div class="form-floating mb-3">
-            <input type="string" class="form-control" id="InputFirstname" placeholder="Prénom" required>
-            <label for="InputFirstname">Prénom (WIP)</label>
+            <input type="string" class="form-control" id="InputFirstname" placeholder="Prénom" v-model="this.form.firstName" required>
+            <label for="InputFirstname">Prénom</label>
         </div>
           
           <div class="form-floating mb-3">
@@ -100,19 +116,17 @@ export default {
             <label for="InputPassword">Mot de passe</label>
         </div>
 
-        <div class="form-floating mb-3">
+        <!-- <div class="form-floating mb-3">
             <input type="password" class="form-control" id="InputPassword" placeholder="Mot de passe" v-model="this.form.password" required>
             <label for="InputPassword">Confirmation du mot de passe (WIP)</label>
-        </div>
+        </div> -->
 
-
-        
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Accepter les CGU</label>
         </div>
         <button type="submit" @click="register" class="btn btn-success" >S'inscrire</button>
-        <button type="submit" @click="signInWithGoogle" class="btn btn-success">S'inscrire avec Google (WIP)</button>  
+        <button type="submit" @click="signInWithGoogle" class="btn btn-success">S'inscrire avec Google</button>  
     </form>
 
     <p> {{this.errMessage}}</p>
