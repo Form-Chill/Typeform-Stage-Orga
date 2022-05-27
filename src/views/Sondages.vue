@@ -24,7 +24,7 @@
 
     <div class="row">
         <div class="col">
-            <Poll></Poll>
+            <Poll class="ms-5"></Poll>
         </div>
         
     </div>

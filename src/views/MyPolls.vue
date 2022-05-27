@@ -16,15 +16,25 @@ export default {
     <h1 class="title-1 fw-bold" style="text-align: center;">Mes sondages</h1>
     <br>
 
-    <div class="">
+    <div class="MyPolls">
         <div class="row row-cols-4">
-            <Poll class="col"></Poll>
-            <Poll class="col"></Poll>
-            <Poll class="col"></Poll>
-            <Poll class="col"></Poll>
+            <Poll class="col ms-3"></Poll>
+            <Poll class="col ms-3"></Poll>
+            <Poll class="col ms-3"></Poll>
+            <Poll class="col ms-3"></Poll>
         </div>
 
     </div>
     
-    <Footer />
+    <Footer class="mt-4" />
 </template>
+
+<style>
+.MyPolls {
+display: flex;
+text-align: center;
+justify-content: center;
+}
+
+
+</style>

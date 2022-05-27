@@ -1,12 +1,13 @@
 <script>
+import Navbar from '../components/Navbar.vue';
 
 export default {
-    components: { }
+    components: { Navbar }
 }
 </script>
 
 <template>
-<Navbar />
+<Navbar></Navbar>
 <br>
     <h1 class="text-center fw-bold">Tableau de bord</h1>
     <br>
@@ -24,7 +25,7 @@ export default {
             </router-link>
         </div>
         
-        <div class="col">
+        <div class="col" id="MyPolls">
             <router-link to="/MyPolls">
                 <button class="shadow-sm btn btn-light" id="btns">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#022C4F" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
@@ -36,7 +37,7 @@ export default {
             </router-link>
         </div>
         
-        <div class="col">
+        <div class="col me-4">
             <router-link to="/Bookmarks">
                 <button class="shadow-sm btn btn-light" id="btns">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#022C4F" class="bi bi-heart-fill" viewBox="0 0 16 16">
@@ -48,7 +49,7 @@ export default {
             </router-link>
         </div>
         
-        <div class="col">
+        <div class="col me-3" id="profile">
             <router-link to="/Profile">
                 <button class="shadow-sm btn btn-light" id="btns">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#022C4F" class="bi bi-person-square" viewBox="0 0 16 16">
@@ -62,7 +63,7 @@ export default {
         </div>    
     </div>
     </div>
-<Footer />
+<Footer class="mt-4"></Footer>
 
 </template>
 
@@ -71,11 +72,20 @@ export default {
 
 #btns {
     width: 175px; 
-    height: 100px;
+    height: 120px;
+    
+}
+
+#MyPolls {
+ position: relative;
+ left: 5%;
 }
 
 h6 {
     color: #022C4F;
 }
-
+#profile { 
+    position: relative;
+    right: 5%;
+}
 </style>
