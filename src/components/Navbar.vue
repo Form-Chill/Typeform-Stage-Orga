@@ -1,8 +1,9 @@
 <script >
-import { onMounted, ref } from "vue";
-import { getAuth, onAuthStateChanged, signOut } from "@firebase/auth";
 
-  var auth;
+import { getAuth, onAuthStateChanged, signOut } from "@firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebaseDb";
+var auth;
 
 export default {
 
@@ -17,16 +18,25 @@ export default {
   created(){
      auth = getAuth();
     onAuthStateChanged(auth, (user) => {
-      if (user)
-        this.loggedIn = true; 
-        else
-        this.loggedIn = false; 
+      if (user) {
+        this.loggedIn = true;
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = getDoc(docRef);
+        if (docSnap.data()) {
+          console.log("Document data:", docSnap.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
 
+      } else {
+        this.loggedIn = false;
+      }
+        
     });
   },
 
   methods: {
-
     seDeconnecter(){
       signOut(auth).then(() => {
         this.loggedIn =  false,
@@ -60,10 +70,6 @@ export default {
             <li class="nav-item">
               <router-link to="/" class="nav-link active text-light ps-4">Accueil</router-link>
             </li>
-
-            <li class="nav-item" v-if="loggedIn">
-              <router-link to="/Dashboard" class="nav-link active text-light ps-4">Tableau de bord</router-link>
-            </li>
             <li class="nav-item">
               <router-link to="/sondages" class="nav-link active text-light ps-4">Sondages</router-link>
             </li>
@@ -74,6 +80,14 @@ export default {
          
             
             <div v-if="loggedIn" >
+                <router-link to="/Dashboard">
+                  <button class="btn btn-outline-light me-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                      <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                    </svg> {{email}}
+                  </button>
+                </router-link>
              <router-link to="/"><button class="btn btn-danger"  @click="seDeconnecter">Se déconnecter</button></router-link>
             </div>
             <div v-else>
