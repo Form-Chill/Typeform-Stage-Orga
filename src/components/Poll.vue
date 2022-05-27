@@ -1,12 +1,13 @@
 <script>
+import Popper from "vue3-popper";
 
 var favourite = false;
 var url = '';
 
-const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
-
     export default {
+        components: { 
+            Popper 
+        },
         data() {
             return {
                 title: '',
@@ -37,7 +38,7 @@ const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstra
 <template>
 
     <div class="card col" style="width: 300px;">
-        <img src="{{imageSrc}}" class="card-img-top" alt=""/>
+        <!-- <img src="{{imageSrc}}" class="card-img-top" alt=""/> Mettre un aperçu du sondage -->
 
         <div class="card-body">
             <h5 class="card-title">{{title}} blbla</h5>
@@ -47,9 +48,12 @@ const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstra
             <!-- Faire fonctionner les popovers -->
                 
                 <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-share-fill" data-bs-toggle="popover" title="Popover title" data-bs-placement="right" data-bs-content="And here's some amazing content. It's very engaging. Right?" viewBox="0 0 20 20">
+                    <Popper content="Partagez le sondage avec ce lien : {{url}}" placement="right">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-share-fill" data-bs-toggle="popover" title="Popover title" data-bs-placement="right" data-bs-content="And here's some amazing content. It's very engaging. Right?" viewBox="0 0 20 20">
                         <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
                     </svg>
+                    </Popper>
+                    
                 </div>
             
                 <div v-if="!favourite">
@@ -75,6 +79,15 @@ const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstra
 
 <style>
 
-
+:root {
+    --popper-theme-background-color: #ffffff;
+    --popper-theme-background-color-hover: #ffffff;
+    --popper-theme-text-color: #333333;
+    --popper-theme-border-width: 0px;
+    --popper-theme-border-style: solid;
+    --popper-theme-border-radius: 6px;
+    --popper-theme-padding: 24px;
+    --popper-theme-box-shadow: 0 6px 30px -6px rgba(0, 0, 0, 0.25);
+  }
 
 </style>

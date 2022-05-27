@@ -30,7 +30,7 @@ export default {
               //  alert("wouhou1");
                 const user = userCredential.user;
                 console.log(user)
-                router.push("/about")  
+                router.push("/dashboard")  
                  
             // Signed in  
             })
