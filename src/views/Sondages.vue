@@ -22,9 +22,9 @@
     <br>
     <!-- Afficher les sondages en fonction de la recherche -->
 
-    <div class="row">
-        <div class="OurPolls">
-            <Poll class="ms-5"></Poll>
+    <div class="OurPolls">
+        <div class="row row-cols-4">
+            <Poll class="col ms-3"></Poll>
         </div>
         
     </div>
