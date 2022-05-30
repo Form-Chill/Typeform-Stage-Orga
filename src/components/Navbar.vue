@@ -2,16 +2,17 @@
 
 import { getAuth, onAuthStateChanged, signOut } from "@firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebaseDb";
+import { db } from "../firebaseDb.js";
 var auth;
+var uid;
+var name, firstName;
 
 export default {
-
-
-
   data() {
     return {
        loggedIn: false,
+       name:"",
+       firstName:""
     }
   },
 
@@ -20,15 +21,8 @@ export default {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.loggedIn = true;
-        const docRef = doc(db, "users", user.uid);
-        const docSnap = getDoc(docRef);
-        if (docSnap.data()) {
-          console.log("Document data:", docSnap.data());
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-        }
-
+        uid = user.uid;
+        this.recupName();
       } else {
         this.loggedIn = false;
       }
@@ -48,6 +42,21 @@ export default {
 
     testConnexion(){
       alert(this.loggedIn);
+    }, 
+
+    async recupName() {
+      const docRef = doc(db, "users", uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        // console.log("Document data:", docSnap.data());
+        this.name = docSnap.data().name;
+        this.firstName = docSnap.data().firstName;
+
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
     }
   }
 }
@@ -85,7 +94,7 @@ export default {
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
                       <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                       <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
-                    </svg> {{email}}
+                    </svg> {{firstName + " " + name}}
                   </button>
                 </router-link>
              <router-link to="/"><button class="btn btn-danger"  @click="seDeconnecter">Se déconnecter</button></router-link>
