@@ -2,7 +2,7 @@
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import { defineComponent, ref } from "vue";
-import { getAuth,signOut, signInWithEmailAndPassword } from "@firebase/auth";
+import { getAuth,signOut, signInWithEmailAndPassword, sendPasswordResetEmail } from "@firebase/auth";
 import router from "../router";
 
 export default {
@@ -53,6 +53,24 @@ export default {
                 }
             });
 
+        },
+        resetPassword() {
+            if (this.form.email == "") {
+                this.message = "Veuillez entrer votre adresse e-mail dans le champ prévu à cet effet !"
+            } else {
+                sendPasswordResetEmail(auth, this.form.email)
+                .then(() => {
+                    // Password reset email sent!
+                    // ..
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(error.code);
+                    console.log(error.message);
+                });
+            }
+
         }
     }
 };
@@ -82,8 +100,11 @@ export default {
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Se souvenir de mes identifiants</label>
         </div>
-        <button @click="login" class="btn btn-success text-center" >Se connecter</button>  
-        <button @click="test" class="btn btn-success text-center" >test</button>  
+        <div class="d-flex">
+            <button @click="login" class="btn btn-success text-center" >Se connecter</button>  
+            <button @click="resetPassword" class="btn btn-success text-center" >J'ai oublié mon mot de passe</button>  
+        </div>
+
 
         <p > {{this.errMessage}}</p>
     </form>

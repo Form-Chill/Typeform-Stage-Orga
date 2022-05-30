@@ -1,24 +1,43 @@
 <script>
+import { getAuth, onAuthStateChanged, updateEmail, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "@firebase/auth";
+import { doc, getDoc, updateDoc } from "@firebase/firestore";
+import { db } from "../firebaseDb.js";
 
-import { getAuth, onAuthStateChanged } from "@firebase/auth";
+var lower, upper, nbChars, specialChar, number, activeBtn, activeBtn2 = false;
 
-var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-
-var lower, upper, nbChars, specialChar, number, activeBtn = false;
-
+var uid, currentUser;
 
 export default {
     data() {
         return {
             email:"",
-            firstname:"",
-            name:"",
-            phone:"",
             actualPassword:"",
             newPassword:"",
             confirmPassword:"",
+            firstName:"",
+            name:"",
             message:"",
+            lower:'false',
+            upper:'false',
+            nbChars:'false',
+            specialChar:'false',
+            number:'false',
+            activeBtn:'false',
+            activeBtn2:'false',
         }
+    },
+    created(){
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+        if (user) {
+            this.uid = user.uid;
+            this.recupInfos();
+            this.currentUser = auth.currentUser;
+            
+        } else {
+            console.log("No one connected !");
+        }
+        });
     },
     methods: {
         verifPassword() {
@@ -75,38 +94,70 @@ export default {
 
         },
         changePassword() {
-            const auth = getAuth();
-            const currentUser = auth.currentUser;
-            if (this.upper && this.lower && this.specialChar && this.chars && this.number && this.newPassword.length >= 7 && this.newPassword == this.confirmPassword && this.actualPassword == currentUser.password) {
-                updatePassword(currentUser, this.newPassword).then(() => {
+            // this.reauthenticate();
+            if (this.upper && this.lower && this.specialChar && this.nbChars && this.number && this.newPassword.length >= 7 && this.newPassword == this.confirmPassword) {
+                updatePassword(this.currentUser, this.newPassword).then(() => {
                     console.log("Maj effectuée");
-                    
                 }).catch((error) => {
                     console.log(error);
                     this.message = "Les critères n'ont pas été respecté ou les mots de passe ne correspondent pas !"
                 });
             }
         },
-    }, 
-    created() {
-            const auth = getAuth();
-            onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const uid = user.uid;
-                this.email = user.email;
-                this.actualPassword = user.password;
-                this.name = user.displayName;
+
+        async reauthenticate() {
+            const auth = getAuth()
+            const credential = EmailAuthProvider.credential(
+                this.email,
+                this.actualPassword
+            )
+            const result = await reauthenticateWithCredential(
+                auth.currentUser, 
+                credential
+            ).then(() => {
+                console.log("connecté");
+            }).catch((error) => {
+                console.log(error);
+            })
+        },
+
+        verifEmail() {
+            if (this.email.match("[a-z0-9]+@[a-z]+\.[a-z]{2,3}")) {
+                this.activeBtn2 = true;
             } else {
-                // User is signed out
-                // ...
+                this.activeBtn2 = false;
+                this.message = "L'adresse Email n'est pas valide !";
             }
-            });
-        }
-}
+        },
+        async changeEmail() {
+                // const auth = getAuth();
+                const userRef = doc(db, "users", this.uid);
+                await updateDoc(userRef, {
+                    email: this.email
+                    });
 
+                updateEmail(this.currentUser, this.email).then(() => {
+                    console.log("Maj effectuée");
+                }).catch((error) => {
+                    console.log(error);
+                });
+            },
+        async recupInfos() {
+            const docRef = doc(db, "users", this.uid);
+            const docSnap = await getDoc(docRef);
 
+            if (docSnap.exists()) {
+                console.log("Document data:", docSnap.data());
+                this.name = docSnap.data().name;
+                this.firstName = docSnap.data().firstName;
+                this.email = docSnap.data().email;
 
-
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+    },
+}}
 
 </script>
 
@@ -134,32 +185,34 @@ export default {
                 <div class="tab-pane fade show active " id="v-pills-Infos" role="tabpanel" aria-labelledby="v-pills-Infos-tab" tabindex="0">
                     
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingEmail" v-model="email">
+                        <input @keypress="verifEmail" type="email" class="form-control" id="floatingEmail" v-model="email">
                         <label for="floatingInput">Adresse Email</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" id="floatingName" v-model="name">
+                        <input class="form-control" id="floatingName" v-model="name" disabled>
                         <label for="floatingPassword">Nom</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" id="floatingFName" v-model="firstname">
+                        <input class="form-control" id="floatingFName" v-model="firstName" disabled>
                         <label for="floatingPassword">Prénom</label>
                     </div>
 
-                    <button type="button" class="btn btn-primary btn-sm disabled">Sauvegarder</button>
+                    <button @click="changeEmail" type="button" class="btn btn-primary btn-sm" id="btnSauv2" >Sauvegarder</button>
+                    <!-- <button type="button" class="btn btn-primary btn-sm disabled" id="btnSauv">Sauvegarder</button> -->
+                    <br>
+                     <p class="text-danger">{{message}}</p>
                 </div>
-
 
 
                 <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
                     <h5 style="text-align: center;">Changer régulièrement votre mot de passe permet de sécuriser votre compte.</h5>
                     <br>
                     <div class="form-floating mb-4">
-                        <input class="form-control" id="floatingPassword" v-model="actualPassword">
+                        <input type="password" class="form-control" id="floatingPassword" v-model="actualPassword">
                         <label for="floatingPassword">Mot de passe actuel</label>
                     </div>
                     <div class="form-floating mb-1">
-                        <input @keyup="verifPassword" class="form-control" id="floatingNewPassword" v-model="newPassword">
+                        <input type="password" @keyup="verifPassword" class="form-control" id="floatingNewPassword" v-model="newPassword">
                         <label for="floatingPassword">Nouveau mot de passe</label>
                     </div>
 
@@ -200,7 +253,7 @@ export default {
                     <span class="badge rounded-pill bg-light text-dark" v-else>1 caractère spécial</span>
                     <br>
                     <div class="form-floating mb-3">
-                        <input class="form-control" id="floatingNewPassword" v-model="confirmPassword">
+                        <input type="password" class="form-control" id="floatingConfirmPassword" v-model="confirmPassword">
                         <label for="floatingPassword">Confirmez votre mot de passe</label>
                     </div>
 
@@ -209,9 +262,6 @@ export default {
 
                     <p class="text-danger">{{message}}</p>
                 </div>
-                <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab" tabindex="0">...</div>
-                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">...</div>
-                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" tabindex="0">...</div>
             </div>
         </div>
     </div>
