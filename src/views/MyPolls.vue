@@ -19,9 +19,6 @@ export default {
     <div class="MyPolls">
         <div class="row row-cols-4">
             <Poll class="col ms-3"></Poll>
-            <Poll class="col ms-3"></Poll>
-            <Poll class="col ms-3"></Poll>
-            <Poll class="col ms-3"></Poll>
         </div>
 
     </div>

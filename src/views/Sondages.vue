@@ -23,7 +23,7 @@
     <!-- Afficher les sondages en fonction de la recherche -->
 
     <div class="row">
-        <div class="col">
+        <div class="OurPolls">
             <Poll class="ms-5"></Poll>
         </div>
         
@@ -34,6 +34,10 @@
 </template>
 
 <style>
-
+.OurPolls {
+display: flex;
+text-align: center;
+justify-content: center;
+}
 
 </style>

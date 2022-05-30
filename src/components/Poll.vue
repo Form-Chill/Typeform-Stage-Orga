@@ -10,20 +10,16 @@ export default {
   components: {
     Popper,
   },
+  el: "#v-for-object",
   data() {
     return {
-      items:[
-        { title: "" },
-        { description: "" },
-        { update: "" },
-        { imageSrc: "" },
-        { favourite: "" },
-        { url: "" },
-      ],
-    };
+          items: [
+            { title: "", description: "", update: "", imageSrc: "", favourite: "", url: "", createur: ""},
+          ],
+        }
   },
   created() {
-      this.getPollsData();
+    this.getPollsData();
   },
   methods: {
     putInFavourite() {
@@ -33,18 +29,23 @@ export default {
         this.favourite = false;
       }
     },
-    getPollsData(){
-        getDoc(doc(db, "polls/f8ZZafzFd6gemXM9MgVQ")).then((docSnap) => {
-      if (docSnap.exists()) {
-        //console.log("Document data:", docSnap.data());
-        this.items = docSnap.data();
-        //console.log("Items data:", this.items);
-        //console.log("Items data:", this.items.title);
-      } else {
-        console.log("No such document!");
-      }
-    });
-    }
+    getPollsData() {
+      getDocs(collection(db, "polls")).then((docsSnap) => {
+        if (!docsSnap.empty) {
+          for (var i = 0; docsSnap.size > i; i++) {
+            this.items[i] = docsSnap.docs[i].data();
+            this.index = i;
+            if (this.items[0].createur){ //Faire la difference entre la marketplace et le perso
+              //TODO
+            }
+            this.itemNumber++;
+          }
+          console.log("Items data:", this.items[1]);
+        } else {
+          console.log("No such document!");
+        }
+      });
+    },
   },
 };
 </script>
@@ -52,14 +53,19 @@ export default {
 
 
 <template>
-  <div class="card col" style="width: 300px">
+  <div
+    class="card col"
+    style="width: 300px"
+    v-for="item in this.items"
+    :key="item"
+  >
     <!-- <img src="{{imageSrc}}" class="card-img-top" alt=""/> Mettre un aperçu du sondage -->
 
     <div class="card-body">
-      <h5 class="card-title">{{ this.items.title }}</h5>
-      <p class="card-text">{{ this.items.description }}</p>
+      <h5 class="card-title">{{ item.title }}</h5>
+      <p class="card-text">{{ item.description }}</p>
       <p class="card-text">
-        <small class="text-muted">{{ this.items.update }}</small>
+        <small class="text-muted">{{ item.update }}</small>
       </p>
       <div id="icons" style="display: flex; float: right">
         <!-- Faire fonctionner les popovers -->
@@ -137,4 +143,5 @@ export default {
   --popper-theme-padding: 24px;
   --popper-theme-box-shadow: 0 6px 30px -6px rgba(0, 0, 0, 0.25);
 }
+
 </style>
