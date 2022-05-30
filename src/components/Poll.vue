@@ -36,10 +36,10 @@ export default {
     getPollsData(){
         getDoc(doc(db, "polls/f8ZZafzFd6gemXM9MgVQ")).then((docSnap) => {
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
+        //console.log("Document data:", docSnap.data());
         this.items = docSnap.data();
-        console.log("Items data:", this.items);
-        console.log("Items data:", this.items.title);
+        //console.log("Items data:", this.items);
+        //console.log("Items data:", this.items.title);
       } else {
         console.log("No such document!");
       }
