@@ -5,18 +5,40 @@ import { collection, addDoc, getDoc, getDocs, doc } from "firebase/firestore";
 
 var favourite = false;
 var url = "";
+var itemsTemp = [
+  {
+    title: "",
+    description: "",
+    update: "",
+    imageSrc: "",
+    favourite: "",
+    url: "",
+    createur: "",
+  },
+];
+var p = 0;
 
 export default {
   components: {
     Popper,
   },
-  el: "#v-for-object",
+  props: {"isMarketplace" : Boolean,
+  "uidIdentifie" : String},
   data() {
     return {
-          items: [
-            { title: "", description: "", update: "", imageSrc: "", favourite: "", url: "", createur: ""},
-          ],
-        }
+      items: [
+        {
+          title: "",
+          description: "",
+          update: "",
+          imageSrc: "",
+          favourite: "",
+          url: "",
+          createur: "",
+          MarketplaceAllowed: "",
+        },
+      ],
+    };
   },
   created() {
     this.getPollsData();
@@ -33,14 +55,25 @@ export default {
       getDocs(collection(db, "polls")).then((docsSnap) => {
         if (!docsSnap.empty) {
           for (var i = 0; docsSnap.size > i; i++) {
-            this.items[i] = docsSnap.docs[i].data();
-            this.index = i;
-            if (this.items[0].createur){ //Faire la difference entre la marketplace et le perso
-              //TODO
+            itemsTemp[i] = docsSnap.docs[i].data();
+            console.log("name data:", itemsTemp[i].createur);
+            //this.items[i] = docsSnap.docs[i].data();
+            if(itemsTemp[i].MarketplaceAllowed == true && this.isMarketplace == "true"){
+              //Faire la difference entre la marketplace et le perso
+              this.items[p] = docsSnap.docs[i].data();
+              p++;
             }
-            this.itemNumber++;
+            if(this.isMarketplace == "false"){
+              if(itemsTemp[i].createur == this.uidIdentifie){
+                this.items[p] = docsSnap.docs[i].data();
+                p++;
+              }
+            }
           }
+          console.log("Items data:", this.items[0]);
           console.log("Items data:", this.items[1]);
+          console.log("Items data:", this.items[2]);
+          console.log("name data:", this.uidIdentifie);
         } else {
           console.log("No such document!");
         }
@@ -143,5 +176,4 @@ export default {
   --popper-theme-padding: 24px;
   --popper-theme-box-shadow: 0 6px 30px -6px rgba(0, 0, 0, 0.25);
 }
-
 </style>

@@ -1,43 +1,48 @@
 <script>
-    import Poll from "../components/Poll.vue";
+import Poll from "../components/Poll.vue";
 
-    export default {
-        components:{ Poll}
-    }
+export default {
+  components: { Poll },
+};
 </script>
 
 
 <template>
+  <Navbar />
+  <br />
+  <h2 class="fw-bold" style="text-align: center">Rechercher un sondage :</h2>
 
-<Navbar />
-    <br>
-    <h2 class="fw-bold" style="text-align: center;">Rechercher un sondage : </h2>
+  <br />
 
-    <br>
+  <div class="input-group mb-3 px-5">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Rechercher un sondage"
+      aria-label="Recipient's username"
+      aria-describedby="button-addon2"
+    />
+    <button class="btn btn-primary" type="button" id="button-addon2">
+      Rechercher
+    </button>
+  </div>
+  <br />
+  <!-- Afficher les sondages en fonction de la recherche -->
 
-    <div class="input-group mb-3 px-5">
-        <input type="text" class="form-control" placeholder="Rechercher un sondage" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button class="btn btn-primary" type="button" id="button-addon2">Rechercher</button>
+  <div class="OurPolls">
+    <div class="row row-cols-4">
+      <Poll isMarketplace="true" class="col ms-3"></Poll>
     </div>
-    <br>
-    <!-- Afficher les sondages en fonction de la recherche -->
+  </div>
 
-    <div class="OurPolls">
-        <div class="row row-cols-4">
-            <Poll class="col ms-3"></Poll>
-        </div>
-        
-    </div>
-    
-    <br>
-<Footer />
+  <br />
+  <Footer />
 </template>
 
 <style>
 .OurPolls {
-display: flex;
-text-align: center;
-justify-content: center;
+  display: flex;
+  text-align: center;
+  justify-content: center;
 }
-
 </style>
