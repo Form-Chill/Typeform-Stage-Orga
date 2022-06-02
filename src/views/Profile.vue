@@ -1,7 +1,8 @@
 <script>
-import { getAuth, onAuthStateChanged, updateEmail, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "@firebase/auth";
+import { getAuth, onAuthStateChanged, updateEmail, updatePassword, EmailAuthProvider, reauthenticateWithCredential, signOut } from "@firebase/auth";
 import { doc, getDoc, updateDoc } from "@firebase/firestore";
 import { db } from "../firebaseDb.js";
+import router from "../router/index.js";
 
 var lower, upper, nbChars, specialChar, number, activeBtn, activeBtn2 = false;
 
@@ -17,13 +18,13 @@ export default {
             firstName:"",
             name:"",
             message:"",
-            lower:'false',
-            upper:'false',
-            nbChars:'false',
-            specialChar:'false',
-            number:'false',
-            activeBtn:'false',
-            activeBtn2:'false',
+            lower:false,
+            upper:false,
+            nbChars:false,
+            specialChar:false,
+            number:false,
+            activeBtn:false,
+            activeBtn2:false,
         }
     },
     created(){
@@ -41,7 +42,7 @@ export default {
     },
     methods: {
         verifPassword() {
-            if (this.newPassword.length >= 7) {
+            if (this.newPassword.length >= 8) {
                 // console.log(this.nbChars);
                 this.nbChars = true;
                 this.activeBtn = true;
@@ -94,36 +95,48 @@ export default {
 
         },
         changePassword() {
-            // this.reauthenticate();
-            if (this.upper && this.lower && this.specialChar && this.nbChars && this.number && this.newPassword.length >= 7 && this.newPassword == this.confirmPassword) {
+            this.reauthenticate();
+            if (this.upper && this.lower && this.specialChar && this.nbChars && this.number && this.newPassword.length >= 8 && this.newPassword == this.confirmPassword) {
                 updatePassword(this.currentUser, this.newPassword).then(() => {
                     console.log("Maj effectuée");
+                    this.actualPassword = "";
+                    this.newPassword = "";
+                    this.confirmPassword = "";
+                    this.verifPassword();
+                    alert("La modification a été effectuée !");
                 }).catch((error) => {
-                    console.log(error);
-                    this.message = "Les critères n'ont pas été respecté ou les mots de passe ne correspondent pas !"
+                    console.log(error.message);
+                    if (error.code == "auth/requires-recent-login") {
+                        // var btnModal = document.getElementById("showModal2");
+                        // btnModal.click();
+                    } else {
+                        this.message = "Les critères n'ont pas été respecté ou les mots de passe ne correspondent pas !"  
+                    }
                 });
             }
         },
 
-        async reauthenticate() {
-            const auth = getAuth()
+        reauthenticate() {
+            const auth = getAuth();
             const credential = EmailAuthProvider.credential(
                 this.email,
                 this.actualPassword
             )
-            const result = await reauthenticateWithCredential(
+            reauthenticateWithCredential(
                 auth.currentUser, 
                 credential
             ).then(() => {
                 console.log("connecté");
             }).catch((error) => {
-                console.log(error);
+                console.log(error.message);
             })
         },
 
         verifEmail() {
-            if (this.email.match("[a-z0-9]+@[a-z]+\.[a-z]{2,3}")) {
+            console.log(this.email);
+            if (this.email.match("/^([\.\_a-zA-Z0-9]+)@([a-zA-Z]+)\.([a-zA-Z]){2,3}$/")) {
                 this.activeBtn2 = true;
+                this.message = "L'adresse e-mail est correcte !";
             } else {
                 this.activeBtn2 = false;
                 this.message = "L'adresse Email n'est pas valide !";
@@ -135,11 +148,16 @@ export default {
                 await updateDoc(userRef, {
                     email: this.email
                     });
-
+                // this.reauthenticate();
                 updateEmail(this.currentUser, this.email).then(() => {
                     console.log("Maj effectuée");
+                    alert("La modification a été effectuée !");
                 }).catch((error) => {
-                    console.log(error);
+                    console.log(error.message);
+                    if (error.code == "auth/requires-recent-login") {
+                        var btnModal = document.getElementById("showModal");
+                        btnModal.click();
+                    }
                 });
             },
         async recupInfos() {
@@ -157,6 +175,15 @@ export default {
                 console.log("No such document!");
             }
     },
+
+    signOut() {
+        const auth = getAuth();
+        signOut(auth).then(() => {
+            router.push("/");
+        }).catch((error) => {
+            console.log(error.message);
+        });
+    }
 }}
 
 </script>
@@ -185,7 +212,7 @@ export default {
                 <div class="tab-pane fade show active " id="v-pills-Infos" role="tabpanel" aria-labelledby="v-pills-Infos-tab" tabindex="0">
                     
                     <div class="form-floating mb-3">
-                        <input @keypress="verifEmail" type="email" class="form-control" id="floatingEmail" v-model="email">
+                        <input @keydown="verifEmail" type="email" class="form-control" id="floatingEmail" v-model="email">
                         <label for="floatingInput">Adresse Email</label>
                     </div>
                     <div class="form-floating mb-3">
@@ -197,10 +224,31 @@ export default {
                         <label for="floatingPassword">Prénom</label>
                     </div>
 
-                    <button @click="changeEmail" type="button" class="btn btn-primary btn-sm" id="btnSauv2" >Sauvegarder</button>
+                    <button @click="changeEmail" @keyup.enter="changeEmail" type="button" class="btn btn-primary btn-sm" id="btnSauv2">Sauvegarder</button>
                     <!-- <button type="button" class="btn btn-primary btn-sm disabled" id="btnSauv">Sauvegarder</button> -->
                     <br>
                      <p class="text-danger">{{message}}</p>
+                     <button id="showModal" data-bs-toggle="modal" data-bs-target="#modal" hidden></button>
+
+                     <!-- Modal -->
+                    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Votre session est expirée, vous devez vous reconnecter pour poursuivre l'opération.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-primary" @click="signOut">Se déconnecter</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
                 </div>
 
 
@@ -261,6 +309,8 @@ export default {
                     <button type="button" class="btn btn-primary btn-sm disabled" id="btnSauv" v-else>Sauvegarder</button>
 
                     <p class="text-danger">{{message}}</p>
+
+                    <button id="showModal2" data-bs-toggle="modal" data-bs-target="#modal2" hidden></button>
                 </div>
             </div>
         </div>
