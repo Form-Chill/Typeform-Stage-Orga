@@ -31,7 +31,7 @@ export default {
 
   <div class="OurPolls">
     <div class="row row-cols-4">
-      <Poll isMarketplace="true" class="col ms-3"></Poll>
+      <Poll isMarketplace="true" uidIdentifie="" class="col ms-3"></Poll>
     </div>
   </div>
 

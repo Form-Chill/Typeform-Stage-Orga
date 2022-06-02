@@ -16,13 +16,12 @@ var itemsTemp = [
     createur: "",
   },
 ];
-var p = 0;
 
 export default {
   components: {
     Popper,
   },
-  props: {"isMarketplace" : Boolean,
+  props: {"isMarketplace" : String,
   "uidIdentifie" : String},
   data() {
     return {
@@ -54,6 +53,7 @@ export default {
     getPollsData() {
       getDocs(collection(db, "polls")).then((docsSnap) => {
         if (!docsSnap.empty) {
+          var p = 0;
           for (var i = 0; docsSnap.size > i; i++) {
             itemsTemp[i] = docsSnap.docs[i].data();
             console.log("name data:", itemsTemp[i].createur);
