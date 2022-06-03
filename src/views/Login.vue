@@ -2,7 +2,9 @@
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import { defineComponent, ref } from "vue";
-import { getAuth,signOut, signInWithEmailAndPassword, sendPasswordResetEmail } from "@firebase/auth";
+import { getAuth,signOut, signInWithEmailAndPassword, sendPasswordResetEmail,GoogleAuthProvider,signInWithPopup } from "@firebase/auth";
+import { db } from "../firebaseDb.js";
+import { collection, addDoc, doc,setDoc,getDoc } from "firebase/firestore";
 import router from "../router";
 
 export default {
@@ -71,7 +73,62 @@ export default {
                 });
             }
 
-        }
+        },
+        async verifyIfUserAlreadyExists(uid){
+         const docRef = await getDoc(doc(db, "users",uid));
+         const docSnap = await getDoc(docRef);
+
+         return docSnap.exists();
+        },
+
+        async addUserData(uid,profile ){
+        //alert(uid);
+        const docRef = await setDoc(doc(db, "users",uid), profile);
+        console.log("Inscription réussie !");
+        },
+
+        signInWithGoogle(){
+        const provider = new GoogleAuthProvider();
+        
+        const auth = getAuth();
+
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            const uid = user.uid;
+            //on veut eviter d'écraser des données de profil si l'utilisateur s'est déjà connecté auparavant (probablement pas la meilleure solution)
+           if(this.verifyIfUserAlreadyExists(uid)) {
+            const profile = {
+                name: "",
+                firstName: user.displayName,
+                email:  user.email,
+            }} else {
+                const profile = {
+                name: "",
+                firstName: user.displayName,
+                email:  user.email,
+                bookmarks:[],
+                pollsCreated:[]
+            }}
+            this.addUserData(uid,profile);
+            router.push('/dashboard');
+        }).catch((error) => {
+            // Handle Errors here.
+            console.log(error)
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+        });
+
+    }
     }
 };
 </script>
@@ -102,7 +159,8 @@ export default {
         </div>
         <div class="d-flex">
             <button @click="login" class="btn btn-success text-center" >Se connecter</button>  
-            <button @click="resetPassword" class="btn btn-success text-center" >J'ai oublié mon mot de passe</button>  
+            <!-- <button @click="resetPassword" class="btn btn-success text-center" >J'ai oublié mon mot de passe</button>   -->
+            <button type="submit" @click="signInWithGoogle" class="btn btn-success">Se connecter avec Google</button>  
         </div>
 
 

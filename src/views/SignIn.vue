@@ -41,10 +41,10 @@ export default {
             var uid = currentUser.uid;
 
             const profile = {
-                name: this.form.name,
+                name: this.form.name.toUpperCase(),
                 firstName: this.form.firstName,
                 email: this.form.email,
-                boomarks:[],
+                bookmarks:[],
                 pollsCreated:[]
             }
 
@@ -72,14 +72,12 @@ export default {
         });
       },
 
+
     async addUserData(uid,profile ){
         //alert(uid);
         const docRef = await setDoc(doc(db, "users",uid), profile);
-        console.log("Inscription réussie !");
-      },
-        signInWithGoogle(){
-
-      }
+        console.log("Inscription réussie !");  
+    },
     }
 }
 
@@ -125,8 +123,7 @@ export default {
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Accepter les CGU</label>
         </div>
-        <button type="submit" @click="register" class="btn btn-success" >S'inscrire</button>
-        <button type="submit" @click="signInWithGoogle" class="btn btn-success">S'inscrire avec Google</button>  
+        <button type="submit" @click="register" class="btn btn-success" >S'inscrire</button> 
     </form>
 
     <p> {{this.errMessage}}</p>
@@ -143,6 +140,7 @@ export default {
 #InscriptionUI{
     padding-top: 5%;
     padding-bottom: 15%;
+    margin:auto;
 }
 
 </style>

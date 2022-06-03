@@ -1,9 +1,26 @@
 <script>
 import Navbar from '../components/Navbar.vue';
+import { getAuth, onAuthStateChanged} from "@firebase/auth";
+import router from '../router';
 
 export default {
-    components: { Navbar }
+    components: { Navbar },
+    created(){
+        let auth = getAuth();
+        onAuthStateChanged(auth,(user) =>{
+            if (user) {
+            
+            
+            } else {
+                console.log("No one connected !");
+                router.push("/login")
+            }
+        });
+
+        
+    }
 }
+ 
 </script>
 
 <template>
