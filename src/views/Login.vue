@@ -4,7 +4,7 @@ import Footer from "../components/Footer.vue";
 import { defineComponent, ref } from "vue";
 import { getAuth,signOut, signInWithEmailAndPassword, sendPasswordResetEmail,GoogleAuthProvider,signInWithPopup } from "@firebase/auth";
 import { db } from "../firebaseDb.js";
-import { collection, addDoc, doc,setDoc,getDoc } from "firebase/firestore";
+import { collection, addDoc, doc,setDoc,getDoc,updateDoc } from "firebase/firestore";
 import router from "../router";
 
 export default {
@@ -17,12 +17,10 @@ export default {
                reminder: ''
             },
             errMessage:'', 
+            profile:null
         }
     },
     methods: {
-        test(){
-            router.push("/");
-        },
         login(){
             console.log("Ceci est l'email " + this.form.email);
             console.log("Ceci est le mot de passe "  + this.form.password);
@@ -74,17 +72,37 @@ export default {
             }
 
         },
-        async verifyIfUserAlreadyExists(uid){
-         const docRef = await getDoc(doc(db, "users",uid));
+        async manageProfileData(uid,user){
+         const docRef = doc(db, "users",uid);
          const docSnap = await getDoc(docRef);
+       
+         if(docSnap.exists()){
 
-         return docSnap.exists();
+            this.profile = {
+                name: "",
+                firstName: user.displayName,
+                email:  user.email,
+            };
+
+            this.updateUserData(uid,this.profile);
+         }
+        else{
+            this.profile = {
+                name: "",
+                firstName: user.displayName,
+                email:  user.email,
+                bookmarks:[],
+                pollsCreated:[]
+            };
+            this.addUserData(uid,this.profile);
+            }
         },
 
         async addUserData(uid,profile ){
-        //alert(uid);
-        const docRef = await setDoc(doc(db, "users",uid), profile);
-        console.log("Inscription réussie !");
+            const docRef = await setDoc(doc(db, "users",uid), profile);
+        },
+        async updateUserData(uid,profile ){
+             const docRef = await updateDoc(doc(db, "users",uid), profile);
         },
 
         signInWithGoogle(){
@@ -100,21 +118,10 @@ export default {
             // The signed-in user info.
             const user = result.user;
             const uid = user.uid;
+            
             //on veut eviter d'écraser des données de profil si l'utilisateur s'est déjà connecté auparavant (probablement pas la meilleure solution)
-           if(this.verifyIfUserAlreadyExists(uid)) {
-            const profile = {
-                name: "",
-                firstName: user.displayName,
-                email:  user.email,
-            }} else {
-                const profile = {
-                name: "",
-                firstName: user.displayName,
-                email:  user.email,
-                bookmarks:[],
-                pollsCreated:[]
-            }}
-            this.addUserData(uid,profile);
+            this.manageProfileData(uid,user);
+            
             router.push('/dashboard');
         }).catch((error) => {
             // Handle Errors here.
