@@ -17,11 +17,10 @@
 
 <script>
 import { ref } from 'vue'
-import RadioButton from "./Radiobutton.vue"
 import MultipleChoice from "./MultipleChoice.vue"
 
 export default {
-components: { RadioButton,  MultipleChoice },
+components: { MultipleChoice },
 
 props: {
      enoncé: String,
