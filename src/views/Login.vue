@@ -56,12 +56,12 @@ export default {
         },
         resetPassword() {
             if (this.form.email == "") {
-                this.message = "Veuillez entrer votre adresse e-mail dans le champ prévu à cet effet avant de réinitialiser votre mot de passe !"
+                this.message = "Veuillez entrer votre adresse e-mail dans le champ prévu à cet effet !"
             } else {
-                const auth = getAuth();
                 sendPasswordResetEmail(auth, this.form.email)
                 .then(() => {
-                    this.message = "Le mot de passe a été réinitialisé, vérifiez votre boîte mail."
+                    // Password reset email sent!
+                    // ..
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -160,13 +160,13 @@ export default {
             <input type="password" class="form-control" id="InputPassword" placeholder="Mot de passe" v-model="form.password" required>
             <label for="InputPassword">Mot de passe</label>
         </div>
-        <!-- <div class="mb-3 form-check">
+        <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Se souvenir de mes identifiants</label>
-        </div> -->
+        </div>
         <div class="d-flex">
             <button @click="login" class="btn btn-success text-center" >Se connecter</button>  
-            <button @click="resetPassword" class="btn btn-success text-center" >J'ai oublié mon mot de passe</button>  
+            <!-- <button @click="resetPassword" class="btn btn-success text-center" >J'ai oublié mon mot de passe</button>   -->
             <button type="submit" @click="signInWithGoogle" class="btn btn-success">Se connecter avec Google</button>  
         </div>
 
