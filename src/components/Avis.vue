@@ -14,7 +14,7 @@
       <div class="row">
 
     <span class="dot col-2 position-absolute top-0 start-0 translate-middle">
-     <img src="../assets/illie.png" class="rounded-circle" width="70" height="70" >
+     <img class="rounded-circle" width="70" height="70" >
     </span>
     <h5 class="card-title col text-light ">Ilié</h5>
 
