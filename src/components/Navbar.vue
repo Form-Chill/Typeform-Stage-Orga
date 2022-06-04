@@ -3,9 +3,6 @@
 import { getAuth, onAuthStateChanged, signOut } from "@firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebaseDb.js";
-var auth;
-var uid;
-var name, firstName;
 
 export default {
   data() {
@@ -16,13 +13,13 @@ export default {
     }
   },
 
-  created(){
-     auth = getAuth();
+  async created(){
+     let auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.loggedIn = true;
-        uid = user.uid;
-        this.recupName();
+        let uid = user.uid;
+         this.recupName(uid);
       } else {
         this.loggedIn = false;
       }
@@ -32,6 +29,7 @@ export default {
 
   methods: {
     seDeconnecter(){
+      let auth = getAuth();
       signOut(auth).then(() => {
         this.loggedIn =  false,
         router.push("/");})
@@ -44,7 +42,7 @@ export default {
       alert(this.loggedIn);
     }, 
 
-    async recupName() {
+    async recupName(uid) {
       const docRef = doc(db, "users", uid);
       const docSnap = await getDoc(docRef);
 

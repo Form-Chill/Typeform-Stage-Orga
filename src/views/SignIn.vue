@@ -5,6 +5,7 @@ import { getAuth, createUserWithEmailAndPassword } from "@firebase/auth";
 import { db } from "../firebaseDb.js";
 import { collection, addDoc, doc,setDoc } from "firebase/firestore";
 import router from "../router";
+import { transformWithEsbuild } from "vite";
 
 export default {
     components: { Navbar, Footer },
