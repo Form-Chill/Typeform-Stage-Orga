@@ -1,5 +1,5 @@
 <script>
-import { getAuth, onAuthStateChanged, updateEmail, updatePassword, EmailAuthProvider, reauthenticateWithCredential, signOut } from "@firebase/auth";
+import { getAuth, onAuthStateChanged, updateEmail, updatePassword, EmailAuthProvider, reauthenticateWithCredential, signOut, deleteUser } from "@firebase/auth";
 import { doc, getDoc, updateDoc } from "@firebase/firestore";
 import { db } from "../firebaseDb.js";
 import router from "../router/index.js";
@@ -7,6 +7,8 @@ import router from "../router/index.js";
 var lower, upper, nbChars, specialChar, number, activeBtn, activeBtn2 = false;
 
 var uid, currentUser;
+
+const auth = getAuth();
 
 export default {
     data() {
@@ -28,7 +30,6 @@ export default {
         }
     },
     created(){
-        const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
         if (user) {
             this.uid = user.uid;
@@ -95,7 +96,7 @@ export default {
 
         },
         changePassword() {
-            this.reauthenticate();
+            // this.reauthenticate();
             if (this.upper && this.lower && this.specialChar && this.nbChars && this.number && this.newPassword.length >= 8 && this.newPassword == this.confirmPassword) {
                 updatePassword(this.currentUser, this.newPassword).then(() => {
                     console.log("Maj effectuée");
@@ -107,8 +108,8 @@ export default {
                 }).catch((error) => {
                     console.log(error.message);
                     if (error.code == "auth/requires-recent-login") {
-                        // var btnModal = document.getElementById("showModal2");
-                        // btnModal.click();
+                        var btnModal = document.getElementById("showModal2");
+                        btnModal.click();
                     } else {
                         this.message = "Les critères n'ont pas été respecté ou les mots de passe ne correspondent pas !"  
                     }
@@ -116,13 +117,12 @@ export default {
             }
         },
 
-        reauthenticate() {
-            const auth = getAuth();
+        async reauthenticate() {
             const credential = EmailAuthProvider.credential(
                 this.email,
-                this.actualPassword
+                this.password,
             )
-            reauthenticateWithCredential(
+            await reauthenticateWithCredential(
                 auth.currentUser, 
                 credential
             ).then(() => {
@@ -143,15 +143,16 @@ export default {
             }
         },
         async changeEmail() {
-                // const auth = getAuth();
-                const userRef = doc(db, "users", this.uid);
-                await updateDoc(userRef, {
-                    email: this.email
-                    });
                 // this.reauthenticate();
                 updateEmail(this.currentUser, this.email).then(() => {
                     console.log("Maj effectuée");
                     alert("La modification a été effectuée !");
+                    
+                    const userRef = doc(db, "users", this.uid);
+                    updateDoc(userRef, {
+                        email: this.email
+                    });
+
                 }).catch((error) => {
                     console.log(error.message);
                     if (error.code == "auth/requires-recent-login") {
@@ -177,11 +178,25 @@ export default {
     },
 
     signOut() {
-        const auth = getAuth();
         signOut(auth).then(() => {
+            router.push("/login");
+        }).catch((error) => {
+            console.log(error.message);
+        });
+    },
+
+    deleteAccount() {
+        // this.reauthenticate();
+        const user = auth.currentUser;
+
+        deleteUser(user).then(() => {
             router.push("/");
         }).catch((error) => {
             console.log(error.message);
+            if (error.code == "auth/requires-recent-login") {
+                var btnModal = document.getElementById("showModal");
+                btnModal.click();
+            }
         });
     }
 }}
@@ -209,7 +224,7 @@ export default {
         
         <div class="d-flex mx-3">
             <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show active " id="v-pills-Infos" role="tabpanel" aria-labelledby="v-pills-Infos-tab" tabindex="0">
+                <div class="tab-pane fade show active" id="v-pills-Infos" role="tabpanel" aria-labelledby="v-pills-Infos-tab" tabindex="0">
                     
                     <div class="form-floating mb-3">
                         <input @keydown="verifEmail" type="email" class="form-control" id="floatingEmail" v-model="email">
@@ -224,7 +239,7 @@ export default {
                         <label for="floatingPassword">Prénom</label>
                     </div>
 
-                    <button @click="changeEmail" @keyup.enter="changeEmail" type="button" class="btn btn-primary btn-sm" id="btnSauv2">Sauvegarder</button>
+                    <button style="border-radius: 10px;" @click="changeEmail" @keyup.enter="changeEmail" type="button" class="btn btn-primary btn-sm" id="btnSauv2">Sauvegarder</button>
                     <!-- <button type="button" class="btn btn-primary btn-sm disabled" id="btnSauv">Sauvegarder</button> -->
                     <br>
                      <p class="text-danger">{{message}}</p>
@@ -249,6 +264,29 @@ export default {
                     </div>
                     </div>
 
+                    <div class="flex-column">
+                        <button style="border-radius: 10px;" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalSup">Supprimer le compte</button>
+                    </div>
+
+                    <!-- Modal suppression compte -->
+                    <div class="modal fade" id="modalSup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Êtes-vous réellement sûr de vouloir supprimer votre compte ? 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-danger" @click="deleteAccount()">Supprimer</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                
                 </div>
 
 
