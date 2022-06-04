@@ -29,13 +29,13 @@
 
 <script>
 import { ref } from 'vue'
-import RadioButton from "./Radiobutton.vue"
 import MultipleChoice from "./MultipleChoice.vue"
 import SimpleText from './SimpleText.vue'
 
 
 export default {
-components: { RadioButton,  MultipleChoice, SimpleText },
+
+components: {  MultipleChoice, SimpleText },
 
 props: {
      enoncé: String,
