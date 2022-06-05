@@ -12,10 +12,8 @@
 
 
 <script>
-import RadioButton from './Radiobutton.vue'
 
 export default{
-    components: {RadioButton},
 
     props: {
         responses: []
