@@ -148,7 +148,7 @@ export default {
 
 <img class="rounded mx-auto d-block" src="../assets/Icon.png" alt="Icone"/>
 
-<h1 style="text-align:center" class="fw-bold">Connexion</h1>
+<h1 style="text-align:center; color: white" class="fw-bold">Connexion</h1>
 <br>
 
     <form class="needs-validation container-fluid px-5" @submit.prevent="" novalidate>
@@ -162,12 +162,23 @@ export default {
         </div>
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Se souvenir de mes identifiants</label>
+            <label class="form-check-label" for="exampleCheck1" style="color:white">Se souvenir de mes identifiants</label>
         </div>
-        <div class="d-flex">
-            <button @click="login" class="btn btn-success text-center" >Se connecter</button>  
-            <!-- <button @click="resetPassword" class="btn btn-success text-center" >J'ai oublié mon mot de passe</button>   -->
-            <button type="submit" @click="signInWithGoogle" class="btn btn-success">Se connecter avec Google</button>  
+
+        <div class="d-inline-flex" id="buttons">
+            <button @click="login" class="btn btn-success text-center me-3" >Se connecter</button>  
+            <button class="btn btn-outline-light text-center me-3">Mot de passe oublié</button>  
+            <button type="submit" @click="signInWithGoogle" class="btn btn-light">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48" width="20" height="20">
+                <defs><path id="a" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/></defs>
+                <clipPath id="b"><use xlink:href="#a" overflow="visible"/></clipPath>
+                <path clip-path="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z"/>
+                <path clip-path="url(#b)" fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z"/>
+                <path clip-path="url(#b)" fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z"/>
+                <path clip-path="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z"/>
+            </svg>
+                Se connecter avec Google
+            </button>  
         </div>
 
 
@@ -184,8 +195,12 @@ export default {
 <style>
 
 #ConnexionUI{
-    padding-top: 5%;
-    padding-bottom: 15%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
+    background-color: #022C4F;
+    border-radius: 20px;
 }
 
 </style>

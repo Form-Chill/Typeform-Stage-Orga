@@ -281,7 +281,7 @@ export default {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                            <button type="button" class="btn btn-danger" @click="deleteAccount()">Supprimer</button>
+                            <button type="button" class="btn btn-danger" @click="deleteAccount">Supprimer</button>
                         </div>
                         </div>
                     </div>
@@ -346,7 +346,7 @@ export default {
                     <button @click="changePassword" type="button" class="btn btn-primary btn-sm" id="btnSauv" v-if="activeBtn">Sauvegarder</button>
                     <button type="button" class="btn btn-primary btn-sm disabled" id="btnSauv" v-else>Sauvegarder</button>
 
-                    <p class="text-danger">{{message}}</p>
+                    <p class="text-danger">{{this.message}}</p>
 
                     <button id="showModal2" data-bs-toggle="modal" data-bs-target="#modal2" hidden></button>
                 </div>
