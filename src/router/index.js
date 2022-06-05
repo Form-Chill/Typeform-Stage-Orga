@@ -12,6 +12,8 @@ import Bookmarks from "@/views/Bookmarks.vue";
 import MyPolls from "@/views/MyPolls.vue";
 import Profile from "@/views/Profile.vue";
 import PollCreate from "@/views/PollCreate.vue";
+import Answer from "@/views/Answer.vue"
+import PollModify from "../views/PollModify.vue";
 
 
 
@@ -74,6 +76,16 @@ const routes = [{
     path: "/PollCreate",
     name: "PollCreate",
     component: PollCreate,
+},
+{
+    path: "/PollModify",
+    name: "PollModify",
+    component: PollModify,
+},
+{
+    path: "/answer",
+    name: "Answer",
+    component: Answer,
 },
 {
     path: "/:catchAll(.*)",

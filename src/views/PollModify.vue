@@ -1,11 +1,17 @@
 
 <script>
+/**
+ * Fixer github action avec illie
+ * isActive
+ * 
+ * 
+ */
 
 import Question from "../components/Question.vue"
 import Navbar from "../components/Navbar.vue"
 import { ref } from "vue";
 import { db } from "../firebaseDb.js";
-import { collection, addDoc, doc,setDoc,updateDoc } from "firebase/firestore";
+import { collection, addDoc, doc,setDoc,updateDoc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import router from "../router";
 
@@ -13,16 +19,11 @@ export default {
     components: { Question, Navbar },
     data(){
       return{
+        idForm: new URL(location.href).searchParams.get("id"),
         indexActive: 0,
         title: '',
 
-        listQuestions: [{
-          enoncé: "Ecrivez votre question ici",
-          type: "SimpleText",
-          isActive: ref(true),
-          responses: []
-
-        }],
+        listQuestions: [],
 
         textRadio: ref("")
         
@@ -34,12 +35,31 @@ export default {
         onAuthStateChanged(auth, (user) => {
         if (user) {
             this.uid = user.uid;
+
+            this.getForm();
+
+
         } else {
             console.log("No one connected !");
         }
         });
     },
     methods: {
+        async getForm(){
+            const docRef = doc(db,"polls",this.idForm);
+            const docSnap = await getDoc(docRef);
+
+            if(docSnap.exists()){
+                this.title = docSnap.data().title;
+                this.listQuestions = docSnap.data().questions;
+            }
+
+
+
+
+
+
+        },
       addQuestion(type){
         this.listQuestions.push({
           enoncé: ref("Je suis un énoncé"),
@@ -58,7 +78,7 @@ export default {
       },
       //modifie la question afichée en fonction de son index
       currentQuestion(index){
-        //this.listQuestions[this.indexActive].isActive = false;
+       // this.listQuestions[this.indexActive].isActive = false;
         //this.listQuestions[index].isActive = true;
         this.indexActive = index;
       },
@@ -76,14 +96,16 @@ export default {
         this.radio = "";
       }
     },
-    async createPoll(){
+    async updatePoll(){
       const poll = {
         questions : this.listQuestions,
         title : this.title,
         createur: this.uid
       };
 
-      const docRef = await addDoc(collection(db, "polls"), poll);
+      const docRef = doc(db, "polls",this.idForm);
+
+      await updateDoc(docRef, poll);
 
   alert(docRef.id)
       console.log("Création réussie !");
@@ -160,7 +182,7 @@ export default {
       </div>
 
       <div class="col-md-3 offset-md-2 col-sm-12 ">
-        <button @click="createPoll()" class="btn btn-success blue">Valider la création</button>
+        <button @click="updatePoll()" class="btn btn-success blue">Valider la modfication</button>
       </div> 
     </div>
 </template>
@@ -173,8 +195,6 @@ export default {
   background-color: #25E589;
   width: inherit;
   padding-block: 1%;
-
-
 }
 
 .page-item{
