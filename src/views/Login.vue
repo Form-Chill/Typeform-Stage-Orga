@@ -16,23 +16,18 @@ export default {
                password: '',
                reminder: ''
             },
-            errMessage:'', 
+            errMessage:'',
+            message:'', 
             profile:null
         }
     },
     methods: {
         login(){
-            console.log("Ceci est l'email " + this.form.email);
-            console.log("Ceci est le mot de passe "  + this.form.password);
-
             signInWithEmailAndPassword(getAuth(), this.form.email, this.form.password)
             .then((userCredential) => {
               //  alert("wouhou1");
                 const user = userCredential.user;
-                console.log(user)
-                router.push("/dashboard")  
-                 
-            // Signed in  
+                router.push("/Dashboard");
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -55,19 +50,20 @@ export default {
 
         },
         resetPassword() {
+            const auth = getAuth();
             if (this.form.email == "") {
-                this.message = "Veuillez entrer votre adresse e-mail dans le champ prévu à cet effet !"
+                this.message = "";
+                this.errMessage = "Veuillez entrer votre adresse e-mail dans le champ prévu à cet effet !";
             } else {
                 sendPasswordResetEmail(auth, this.form.email)
                 .then(() => {
-                    // Password reset email sent!
-                    // ..
+                    this.errMessage = "";
+                    this.message = "Un email vous a été envoyé pour réinitialiser votre mot de passe !";
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.log(error.code);
-                    console.log(error.message);
+                    if (error.code == "auth/user-not-found") {
+                        this.errMessage = "L'utilisateur est inconnu !";
+                    }
                 });
             }
 
@@ -160,14 +156,14 @@ export default {
             <input type="password" class="form-control" id="InputPassword" placeholder="Mot de passe" v-model="form.password" required>
             <label for="InputPassword">Mot de passe</label>
         </div>
-        <div class="mb-3 form-check">
+        <!-- <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1" style="color:white">Se souvenir de mes identifiants</label>
-        </div>
+        </div> -->
 
         <div class="d-inline-flex" id="buttons">
             <button @click="login" class="btn btn-success text-center me-3" >Se connecter</button>  
-            <button class="btn btn-outline-light text-center me-3">Mot de passe oublié</button>  
+            <button @click="resetPassword" class="btn btn-outline-light text-center me-3">Réinitialiser le mot de passe</button>  
             <button type="submit" @click="signInWithGoogle" class="btn btn-light">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48" width="20" height="20">
                 <defs><path id="a" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/></defs>
@@ -181,8 +177,25 @@ export default {
             </button>  
         </div>
 
+        <br>
+        <br>
+        <div class="alert alert-danger d-inline-flex align-items-center" role="alert" v-if="errMessage">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </svg>
+            <div class="px-2">
+                {{this.errMessage}}
+            </div>
+    </div>
 
-        <p > {{this.errMessage}}</p>
+    <div class="alert alert-success d-inline-flex align-items-center" role="alert" v-if="message">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+            <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+        </svg>
+            <div class="px-2">
+                {{this.message}}
+            </div>
+    </div>
     </form>
     <br>
 

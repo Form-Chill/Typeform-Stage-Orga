@@ -28,7 +28,7 @@ export default {
 <br>
     <h1 class="text-center fw-bold">Tableau de bord</h1>
     <br>
-    <div class="container-lg">
+    <div class="container-lg" id="buttons">
         <div class="row">
 
         <div class="col-2">
@@ -54,7 +54,7 @@ export default {
             </router-link>
         </div>
         
-        <div class="col me-4">
+        <div class="col me-3">
             <router-link to="/Bookmarks">
                 <button class="shadow-sm btn btn-light" id="btns">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#022C4F" class="bi bi-heart-fill" viewBox="0 0 16 16">
@@ -105,4 +105,9 @@ h6 {
     position: relative;
     right: 5%;
 }
+
+/* #buttons {
+    margin-left: 50%;
+    margin-right: 50%;
+} */
 </style>

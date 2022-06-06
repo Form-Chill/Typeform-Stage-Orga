@@ -6,6 +6,7 @@ import { db } from '../firebaseDb'
 import { ref } from 'vue'
 import router from '../router'
 import Question from '../components/Question.vue'
+import Navbar from '../components/Navbar.vue'
 
 
 
@@ -13,7 +14,7 @@ import Question from '../components/Question.vue'
 
 export default{
 
-    components: { Question},
+    components: { Question, Navbar },
     data() {
         return {
             id: new URL(location.href).searchParams.get("id"),
@@ -44,6 +45,8 @@ export default{
 
 
 <template>
+
+<Navbar />
 
 <h1>Réponse au sondage {{this.title}}</h1>
 <!-- <div v-for="(item,index) in this.questions">
