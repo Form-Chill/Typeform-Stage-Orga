@@ -15,6 +15,7 @@ export default {
       return{
         indexActive: 0,
         title: '',
+        MarketplaceAllowed : false,
 
         listQuestions: [{
           enoncé: "Ecrivez votre question ici",
@@ -80,7 +81,8 @@ export default {
       const poll = {
         questions : this.listQuestions,
         title : this.title,
-        createur: this.uid
+        createur: this.uid,
+        MarketplaceAllowed : this.MarketplaceAllowed
       };
 
       const docRef = await addDoc(collection(db, "polls"), poll);
@@ -88,6 +90,15 @@ export default {
   alert(docRef.id)
       console.log("Création réussie !");
       router.push("/dashboard")
+    },
+    setMarketplace(){
+      if(this.MarketplaceAllowed == false){
+        this.MarketplaceAllowed = true;
+      }
+      else{
+        this.MarketplaceAllowed = false;
+      }
+      console.log("Marketplace State : ", this.MarketplaceAllowed);
     }
 
     }
@@ -161,6 +172,7 @@ export default {
 
       <div class="col-md-3 offset-md-2 col-sm-12 ">
         <button @click="createPoll()" class="btn btn-success blue">Valider la création</button>
+        <input @click="setMarketplace()" type="checkbox" name="isMarketplaceAllowed" value="false"> Poster sur le marketplace ?
       </div> 
     </div>
 </template>
