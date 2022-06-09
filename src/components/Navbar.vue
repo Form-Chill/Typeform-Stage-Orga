@@ -78,7 +78,7 @@ export default {
               <router-link to="/" class="nav-link active text-light ps-4">Accueil</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/sondages" class="nav-link active text-light ps-4">Sondages</router-link>
+              <router-link to="/marketplace" class="nav-link active text-light ps-4">Marketplace</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/about" class="nav-link active text-light  ps-4">A propos</router-link>
