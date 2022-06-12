@@ -21,7 +21,7 @@ export default {
     <span class="dot col-2 position-absolute top-0 start-0 translate-middle">
      <!-- <img class="rounded-circle" width="70" height="70" > -->
     </span>
-    <h5 class="card-title col text-light" style="text-align: center;">{{this.name}}</h5>
+    <h3 class="card-title col text-light" style="text-align: center;">{{this.name}}</h3>
 
     </div>
 

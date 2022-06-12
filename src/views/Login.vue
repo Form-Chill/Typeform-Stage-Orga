@@ -147,7 +147,7 @@ export default {
 <h1 style="text-align:center; color: white" class="fw-bold">Connexion</h1>
 <br>
 
-    <form class="needs-validation container-fluid px-5" @submit.prevent="" novalidate>
+    <form class="needs-validation container-fluid px-5" @submit.prevent="login" novalidate>
           <div class="form-floating mb-3">
             <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Adresse Email" v-model="form.email" required>
             <label for="InputEmail">Adresse Email</label>
@@ -162,7 +162,7 @@ export default {
         </div> -->
 
         <div class="d-inline-flex" id="buttons">
-            <button @click="login" class="btn btn-success text-center me-3" >Se connecter</button>  
+            <button class="btn btn-success text-center me-3" >Se connecter</button>  
             <button @click="resetPassword" class="btn btn-outline-light text-center me-3">Réinitialiser le mot de passe</button>  
             <button type="submit" @click="signInWithGoogle" class="btn btn-light">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48" width="20" height="20">

@@ -87,7 +87,7 @@ export default {
 
 <template>
   <div
-    class="card col"
+    class="card col ms-3 mb-4"
     style="width: 300px"
     v-for="item in this.items"
     :key="item"

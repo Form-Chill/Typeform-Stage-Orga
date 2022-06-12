@@ -1,13 +1,10 @@
 <script>
-import Navbar from "../components/Navbar.vue";
-import Footer from "../components/Footer.vue";
 import { getAuth, createUserWithEmailAndPassword } from "@firebase/auth";
 import { db } from "../firebaseDb.js";
 import { collection, addDoc, doc,setDoc } from "firebase/firestore";
 import router from "../router";
 
 export default {
-    components: { Navbar, Footer },
     data() {
         return {
            form: {
@@ -94,7 +91,7 @@ export default {
 <img class="mx-auto d-block" src="../assets/Icon.png" alt="Icone"/>
 <h1 style="text-align:center; color:white" class="fw-bold"> Inscription</h1>
 <br>
-    <form class="needs-validation container-fluid px-5" @submit.prevent="">
+    <form class="needs-validation container-fluid px-5" @submit.prevent="register">
         <div class="form-floating mb-3">
             <input type="string" class="form-control" id="InputName" placeholder="Nom" v-model="this.form.name" required>
             <label for="InputName">Nom</label>
@@ -125,7 +122,7 @@ export default {
             <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="this.form.CGU" required>
             <label style="color: white;" class="form-check-label" for="exampleCheck1">Accepter les CGU</label>
         </div>
-        <button type="submit" @click="register" class="btn btn-success" >S'inscrire</button> 
+        <button class="btn btn-success" >S'inscrire</button> 
 
     <br>
     <br>

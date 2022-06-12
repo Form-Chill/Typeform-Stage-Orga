@@ -137,9 +137,10 @@ export default {
   </h1>
   <br />
 
-  <div class="row row-cols-4 ">
+<div class="container-lg">
+  <div class="row row-cols-4">
 
-  <div class="MyPolls  card col col ms-3" v-for="(item,index) in this.myPolls" style="width: 300px">
+  <div class="MyPolls card col col ms-3" v-for="(item,index) in this.myPolls" style="width: 300px">
 
     <div class="card-body">
             <h5 class="card-title">{{ item.title }}</h5>
@@ -221,6 +222,8 @@ export default {
     
   </div>
   </div>
+</div>
+  
 
   <Footer class="mt-4" />
 </template>

@@ -29,9 +29,9 @@ export default {
   <br />
   <!-- Afficher les sondages en fonction de la recherche -->
 
-  <div class="OurPolls">
-    <div class="row row-cols-4">
-      <Poll isMarketplace="true" uidIdentifie="" class="col ms-3"></Poll>
+  <div class="container-lg OurPolls">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+        <Poll isMarketplace="true" uidIdentifie=""></Poll>
     </div>
   </div>
 

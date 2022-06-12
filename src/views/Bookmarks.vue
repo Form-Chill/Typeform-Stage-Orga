@@ -126,7 +126,7 @@ export default {
 
      
 
-
+<div class="container-lg">
     <div class="row row-cols-4 ">
         <div id= "favoris"  class="card col col ms-3"
             style="width: 300px" v-for="(item,index) in this.bookmarks">
@@ -211,7 +211,9 @@ export default {
         
 
     </div>
-    <button @click="test()">test </button>
+</div>
+    
+    <!-- <button @click="test()">test </button> -->
     
     <Footer class= "mt-4"></Footer>
 
