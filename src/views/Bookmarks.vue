@@ -27,11 +27,8 @@ export default {
           
         } else {
             console.log("No one connected !");
-           
         }
         });
-
-
     },
     methods:{
         async getFavorites(uid){
@@ -52,17 +49,13 @@ export default {
                 const docRef2 = doc(db,"polls",element);
                 const docSnap2 = await getDoc(docRef2);
 
-
                 if (docSnap.exists()) {
-
                     const object = Object.assign(docSnap2.data(),{id : element,favourite: ref(true),url : "localhost:3000/answer?id=" + element })
-
                     this.bookmarks.push(object);
-
-                console.log("Document data2:",this.bookmarks[0]);
-                } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document! 2");
+                    console.log("Document data2:",this.bookmarks[0]); }
+                else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document! 2");
                 }
 
                 
@@ -97,7 +90,7 @@ export default {
         test(){
             console.log(this.bookmarks)
         },
-        putInFavourite(favourites,index) {
+        putInFavourite(index) {
       
       if (this.bookmarks[index].favourite == false) {
         this.bookmarks[index].favourite  = true;
@@ -121,7 +114,7 @@ export default {
     <Navbar></Navbar>
     <br>
 
-    <h1 class="title-1 fw-bold" style="text-align: center;">Mes favoris</h1>
+    <h1 class="title-1 fw-bold txt-blue" style="text-align: center;">Mes favoris</h1>
     <br>
 
      
@@ -167,7 +160,7 @@ export default {
 
                 <div v-if="item.favourite">
                 <svg
-                    @click="putInFavourite(item.favourite,index)"
+                    @click="putInFavourite(index)"
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="20"
@@ -186,7 +179,7 @@ export default {
 
                 <div v-else>
                 <svg
-                    @click="putInFavourite(item.favourite,index)"
+                    @click="putInFavourite(index)"
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="20"

@@ -26,7 +26,8 @@ export default {
 <template>
 <Navbar></Navbar>
 <br>
-    <h1 class="text-center fw-bold">Tableau de bord</h1>
+    <div class="Dashboard">
+    <h1 class="text-center fw-bold txt-blue">Tableau de bord</h1>
     <br>
     <div class="container-lg" id="buttons">
         <div class="row justify-content-center">
@@ -80,6 +81,7 @@ export default {
         </div>    
     </div>
     </div>
+    </div>
 <Footer class="mt-4"></Footer>
 
 </template>
@@ -93,21 +95,12 @@ export default {
     
 }
 
-/* #MyPolls {
- position: relative;
- left: 5%;
-} */
-
 h6 {
     color: #022C4F;
 }
-/* #profile { 
-    position: relative;
-    right: 5%;
-} */
 
-/* #buttons {
-    margin-left: 50%;
-    margin-right: 50%;
-} */
+.Dashboard{
+    padding-bottom: 40%;;
+}
+
 </style>

@@ -77,9 +77,19 @@ export default {
             <li class="nav-item">
               <router-link to="/" class="nav-link active text-light ps-4">Accueil</router-link>
             </li>
+            
+            
+            <div v-if="loggedIn" >
+              <li class="nav-item">
+                <router-link to="/Dashboard" class="nav-link active text-light  ps-4">Tableau de bord</router-link>
+              </li>
+            
+            </div>
+
             <li class="nav-item">
               <router-link to="/marketplace" class="nav-link active text-light ps-4">Marketplace</router-link>
             </li>
+
             <li class="nav-item">
               <router-link to="/about" class="nav-link active text-light  ps-4">A propos</router-link>
             </li>
@@ -87,7 +97,7 @@ export default {
          
             
             <div v-if="loggedIn" >
-                <router-link to="/Dashboard">
+                <router-link to="/Profile">
                   <button class="btn btn-outline-light me-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
                       <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>

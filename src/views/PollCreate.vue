@@ -87,7 +87,6 @@ export default {
 
       const docRef = await addDoc(collection(db, "polls"), poll);
 
-  alert(docRef.id)
       console.log("Création réussie !");
       router.push("/dashboard")
     },

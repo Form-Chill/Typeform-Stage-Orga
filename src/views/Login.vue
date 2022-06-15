@@ -147,7 +147,7 @@ export default {
 <h1 style="text-align:center; color: white" class="fw-bold">Connexion</h1>
 <br>
 
-    <form class="needs-validation container-fluid px-5" @submit.prevent="login" novalidate>
+    <form class="needs-validation container-fluid px-5" @submit.prevent="" novalidate>
           <div class="form-floating mb-3">
             <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Adresse Email" v-model="form.email" required>
             <label for="InputEmail">Adresse Email</label>
@@ -161,10 +161,10 @@ export default {
             <label class="form-check-label" for="exampleCheck1" style="color:white">Se souvenir de mes identifiants</label>
         </div> -->
 
-        <div class="d-inline-flex" id="buttons">
-            <button class="btn btn-success text-center me-3" >Se connecter</button>  
-            <button @click="resetPassword" class="btn btn-outline-light text-center me-3">Réinitialiser le mot de passe</button>  
-            <button type="submit" @click="signInWithGoogle" class="btn btn-light">
+        <div class=" row " id="buttons">
+            <button @click="login" class="btn btn-success text-center me-3 col-md-3" >Se connecter</button>  
+            <button @click="resetPassword" class="btn btn-outline-light text-center me-3 col-md-3">Réinitialiser le mot de passe</button>  
+            <button type="submit" @click="signInWithGoogle" class="btn btn-light col-md-3">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48" width="20" height="20">
                 <defs><path id="a" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/></defs>
                 <clipPath id="b"><use xlink:href="#a" overflow="visible"/></clipPath>
@@ -208,6 +208,7 @@ export default {
 <style>
 
 #ConnexionUI{
+    padding-bottom: 10%;
     margin-top: 5%;
     margin-bottom: 5%;
     margin-left: 20%;

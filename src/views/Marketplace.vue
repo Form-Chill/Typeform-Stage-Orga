@@ -10,7 +10,7 @@ export default {
 <template>
   <Navbar />
   <br />
-  <h2 class="fw-bold" style="text-align: center">Rechercher un sondage :</h2>
+  <h2 class="fw-bold txt-blue" style="text-align: center">Rechercher un sondage :</h2>
 
   <br />
 

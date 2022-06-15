@@ -48,13 +48,13 @@ import { getAuth, onAuthStateChanged } from "@firebase/auth";
        <div class="row"> 
 
         <div class="col-sm-12 col-md-6 pt-2">  
-           <h1 class="display-2 fw-bold">Demandez l'avis de vos clients avec style.</h1><br>
+           <h1 class="display-2 fw-bold txt-blue">Demandez l'avis de vos clients avec style.</h1><br>
             <h6>
             Créez simplement des sondages polyvalents et accessibles à tous. Form&Chill est un formidable outil vous permettant de booster votre productivité. <br> N'attendez plus ! Créez un compte et lancez-vous dans la création de votre premier sondage !
             </h6><br>
 
        
-        <button @click="btnSondage" id="pollCreate" type="button" class="btn btn-primary btn-lg shadow-sm">
+        <button @click="btnSondage" type="button" class="btn btn-primary btn-lg shadow-sm btn-blue">
             Créer un sondage
         </button>
         
@@ -142,11 +142,6 @@ import { getAuth, onAuthStateChanged } from "@firebase/auth";
     align-items: center;
     justify-content: center;
     margin-bottom: 50%;
-}
-
-#pollCreate {
-  background-color: #022C4F !important;
-  border: #022C4F !important;
 }
 
 #imgAccueil{
