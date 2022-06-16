@@ -1,25 +1,19 @@
 <template>
 
-<div class="row block">
 
-    <div id="apercu" class="card" style="width: 100rem;">
+    <div id="apercu" class="card mw-100 mh-100">
         <div class="class-body " >
-            <div class="col-md-8  bbbb">
-            <p class="card-text enonce"><b>{{this.enoncé}}</b></p>
+            <div class="col-md-8 bbbb">
+                <p class="card-text enonce"><b>{{this.enoncé}}</b></p>
             </div>
-            <div class="col-md-12 component">
-            <component :is="type" :responses="responses"></component>
+            <div class="component">
+                <component class="d-flex flex-column my-2" :is="type" :responses="responses"></component>
             </div>
-            <a class="btn btn-primary float-end bouton blue" >OK</a>
+            <a class="btn btn-primary float-end mx-5 bouton blue" >OK</a>
             
         </div>
         
     </div>
-
-    
-
-
-</div>
 
 
 

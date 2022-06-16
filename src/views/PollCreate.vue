@@ -74,7 +74,7 @@ export default {
         alert("Le texte est vide");
       else{
         this.listQuestions[this.indexActive].responses.push(textRadio);
-        this.radio = "";
+        this.textRadio = "";
       }
     },
     async createPoll(){
@@ -142,13 +142,13 @@ export default {
    <div class="container-lg">
     <div v-for="(item,index) in this.listQuestions">
       <div v-if="index == indexActive">
-        <label>Texte enoncé:</label><br>  
-        <input class="form-control" v-model="listQuestions[index].enoncé">
+        <label>Texte de l'énoncé:</label><br>  
+        <input class="form-control mb-3" v-model="listQuestions[index].enoncé" placeholder="Ecrivez votre question ici">
        
-        <div v-show= "listQuestions[index].type == 'MultipleChoice'">
-          <label>Texte radio bouton:</label><br>  
-          <input v-model="textRadio">
-          <button @click="addBtnRadio(textRadio)" class="btn btn-success text-center ms-2">Valider</button>
+        <div v-show= "listQuestions[index].type == 'MultipleChoice'" class="mb-3">
+          <label>Texte des réponses possibles :</label><br>  
+          <input v-model="textRadio" >
+          <button @click="addBtnRadio(textRadio)" class="btn btn-success btn-sm text-center ms-2">Valider</button>
         </div>
 
         <Question v-bind="listQuestions[index]"></Question> 

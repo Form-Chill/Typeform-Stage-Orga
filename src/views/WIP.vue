@@ -1,8 +1,8 @@
 <template>
-    <div class="container start-50">
+    <div class="container top-50 start-50">
       <div class="block text-white">
         <h1 id="title">Cette page est en cours de construction !</h1>
-        <p id="text" class="text-light">
+        <p id="text">
             Notre site web est encore en bêta, <br> vous ne devriez pas être là à nous observer en train de travailler !
         </p>
         <router-link to="/">

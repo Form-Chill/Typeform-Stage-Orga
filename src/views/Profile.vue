@@ -20,6 +20,8 @@ export default {
             firstName:"",
             name:"",
             message:"",
+            emailMessageDanger:"",
+            emailMessageSuccess:"",
             lower:false,
             upper:false,
             nbChars:false,
@@ -140,10 +142,12 @@ export default {
 
             if (this.email.includes("@")) {
                 this.activeBtn2 = true;
-                this.message = "L'adresse e-mail est correcte !"
+                this.emailMessageSuccess= "L'adresse e-mail est correcte !"
+                this.emailMessageDanger = "";
             } else {
                 this.activeBtn2 = false;
-                this.message = "L'adresse Email n'est pas valide !";
+                this.emailMessageDanger = "L'adresse Email n'est pas valide !";
+                this.emailMessageSuccess = "";
             }
         },
         async changeEmail() {
@@ -234,7 +238,7 @@ export default {
                 <div class="tab-pane fade show active" id="v-pills-Infos" role="tabpanel" aria-labelledby="v-pills-Infos-tab" tabindex="0">
                     
                     <div class="form-floating mb-3">
-                        <input @keydown="verifEmail" type="email" class="form-control" id="floatingEmail" v-model="email">
+                        <input @keyup="verifEmail" type="email" class="form-control" id="floatingEmail" v-model="email">
                         <label for="floatingInput">Adresse Email</label>
                     </div>
                     <div class="form-floating mb-3">
@@ -250,12 +254,21 @@ export default {
                     <!-- <button type="button" class="btn btn-primary btn-sm disabled" id="btnSauv">Sauvegarder</button> -->
                     <br>
                     <br/>
-                     <div class="alert alert-danger d-inline-flex align-items-center" role="alert" v-if="message">
+                     <div class="alert alert-danger d-inline-flex align-items-center" role="alert" v-if="emailMessageDanger">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
                             <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                         </svg>
                         <div class="px-2">
-                            {{this.message}}
+                            {{this.emailMessageDanger}}
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success d-inline-flex align-items-center" role="alert" v-if="emailMessageSuccess">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="green" class="bi bi-check" viewBox="0 0 16 16">
+                            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                        </svg>
+                        <div class="px-2">
+                            {{this.emailMessageSuccess}}
                         </div>
                     </div>
 

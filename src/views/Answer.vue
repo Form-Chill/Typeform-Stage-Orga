@@ -7,6 +7,7 @@ import { ref } from 'vue'
 import router from '../router'
 import Question from '../components/Question.vue'
 import Navbar from '../components/Navbar.vue'
+import AnswerVue from '../components/Answer.vue'
 
 
 
@@ -14,7 +15,7 @@ import Navbar from '../components/Navbar.vue'
 
 export default{
 
-    components: { Question, Navbar },
+    components: { Question, Navbar, AnswerVue },
     data() {
         return {
             id: new URL(location.href).searchParams.get("id"),
@@ -45,16 +46,19 @@ export default{
 
 
 <template>
-
-<Navbar />
-
-<h1>Réponse au sondage {{this.title}}</h1>
 <!-- <div v-for="(item,index) in this.questions">
           <div v-if="index == this.indexActive"> -->
-          <Question v-bind="questions"></Question>
-          <!-- </div>
 
+<!-- <div class="mh-100 mw-100">
+    <Question v-bind="questions"></Question>
+</div>
+-->
+
+<AnswerVue></AnswerVue>
+
+          <!-- </div>
 </div> -->
+<br>
 
 
 
