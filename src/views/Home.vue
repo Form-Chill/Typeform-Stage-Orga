@@ -74,7 +74,7 @@ import { getAuth, onAuthStateChanged } from "@firebase/auth";
 
 
 
-    <h2 class="fw-bold" style="text-align: center;">Ils nous recommandent :</h2>
+    <h2 class="fw-bold txt-blue" style="text-align: center;">Ils nous recommandent :</h2>
     <br/>
       <div class="row justify-content-center" id="brands">
         <div class="col-3">
@@ -89,14 +89,13 @@ import { getAuth, onAuthStateChanged } from "@firebase/auth";
           <img class="img-fluid" src="../assets/logo-fnac.png" width="400" height="250" />                   
       </div>
     </div>
-    <!-- <Carousel></Carousel> -->
     <br>
     
     <div id="container">
       <div class="row"> 
         <div class="col-sm-12 col-md-6 flex-shrink-0">  
           <div class="flex-grow-1 ms-3">
-            <h2 class="fw-bold">Un produit simple à prendre en main.</h2><br>
+            <h2 class="fw-bold txt-blue">Un produit simple à prendre en main.</h2><br>
           <h5>
             Form&Chill est un produit capable d'être utilisé par n'importe qui. Nous avons conçu un produit ergonomique et polyvalent pouvant être utilisé par tous.
             Nombre de nos clients sont satisfaits de notre produit et le recommandent vivement !
@@ -112,7 +111,7 @@ import { getAuth, onAuthStateChanged } from "@firebase/auth";
     </div>
     <br>
   
-    <h3 style="text-align: center;" class="fw-bold"> Nos clients sont satisfaits à 95%</h3>
+    <h3 style="text-align: center;" class="fw-bold txt-blue"> Nos clients sont satisfaits à 95%</h3>
     <br>
     <div class="row justify-content-center">
       <div id="avis1" class="col-12">

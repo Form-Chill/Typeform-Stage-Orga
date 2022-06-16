@@ -1,12 +1,4 @@
-
 <script>
-/**
- * Fixer github action avec illie
- * isActive
- * 
- * 
- */
-
 import Question from "../components/Question.vue"
 import Navbar from "../components/Navbar.vue"
 import { ref } from "vue";
@@ -22,44 +14,32 @@ export default {
         idForm: new URL(location.href).searchParams.get("id"),
         indexActive: 0,
         title: '',
-
         listQuestions: [],
-
         textRadio: ref("")
         
       }
     },
     created(){
       const auth = getAuth();
-       
-        onAuthStateChanged(auth, (user) => {
+      onAuthStateChanged(auth, (user) => {
         if (user) {
             this.uid = user.uid;
-
             this.getForm();
-
-
         } else {
             console.log("No one connected !");
         }
         });
     },
     methods: {
-        async getForm(){
-            const docRef = doc(db,"polls",this.idForm);
-            const docSnap = await getDoc(docRef);
+      async getForm() {
+        const docRef = doc(db, "polls", this.idForm);
+        const docSnap = await getDoc(docRef);
 
-            if(docSnap.exists()){
-                this.title = docSnap.data().title;
-                this.listQuestions = docSnap.data().questions;
-            }
-
-
-
-
-
-
-        },
+        if (docSnap.exists()) {
+          this.title = docSnap.data().title;
+          this.listQuestions = docSnap.data().questions;
+        }
+      },
       addQuestion(type){
         this.listQuestions.push({
           enoncé: ref("Je suis un énoncé"),
@@ -74,12 +54,9 @@ export default {
       removeQuestion(index){
         this.listQuestions.splice(index,1);
         this.indexActive = 0;
-        //this.listQuestions[this.indexActive].isActive = true;
       },
       //modifie la question afichée en fonction de son index
       currentQuestion(index){
-       // this.listQuestions[this.indexActive].isActive = false;
-        //this.listQuestions[index].isActive = true;
         this.indexActive = index;
       },
       //modifie le type de la question (question à choix multiple, question avec une réponse possédant un simple input...)
@@ -102,13 +79,8 @@ export default {
         title : this.title,
         createur: this.uid
       };
-
       const docRef = doc(db, "polls",this.idForm);
-
       await updateDoc(docRef, poll);
-
-  alert(docRef.id)
-      console.log("Création réussie !");
       router.push("/dashboard")
     }
 

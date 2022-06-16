@@ -34,72 +34,48 @@ export default {
         async getFavorites(uid){
             const docRef = doc(db,"users",uid);
             const docSnap = await getDoc(docRef);
-
             if (docSnap.exists()) {
-            this.bookmarksID = docSnap.data().bookmarks;
-            console.log("bookmarkID",this.bookmarksID  );
-
-            
+                this.bookmarksID = docSnap.data().bookmarks;
             } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
+                console.log("No such document!");
             }
 
             this.bookmarksID.forEach(async element => {
                 const docRef2 = doc(db,"polls",element);
                 const docSnap2 = await getDoc(docRef2);
-
                 if (docSnap.exists()) {
-                    const object = Object.assign(docSnap2.data(),{id : element,favourite: ref(true),url : "localhost:3000/answer?id=" + element })
+                    const object = Object.assign(docSnap2.data(),{id : element,favourite: ref(true),url : "localhost:3000/answer?id=" + element });
                     this.bookmarks.push(object);
                     console.log("Document data2:",this.bookmarks[0]); }
                 else {
-                    // doc.data() will be undefined in this case
                     console.log("No such document! 2");
-                }
-
-                
-            });
-
-
-
-
-                    
+                } 
+            });        
         },
-        async setFavourite(index){
+
+        async putFavourite(index){
             this.bookmarksID.push(this.bookmarks[index].id);
-            
             const docRef2 = doc(db,"users",this.uid);
               await updateDoc(docRef2,{
                   bookmarks : this.bookmarksID
               });
-             
-
         },
+
         async removeFavourite(index){
-            this.bookmarksID.splice(index,1);
-            console.log(this.bookmarksID)
-            
+            this.bookmarksID = this.bookmarksID.filter(data => data != this.bookmarks[index].id);
             const docRef2 = doc(db,"users",this.uid);
-              await updateDoc(docRef2,{
-                  bookmarks : this.bookmarksID
-              });
-
-
+            await updateDoc(docRef2,{bookmarks : this.bookmarksID});
         },
-        test(){
-            console.log(this.bookmarks)
+
+        setFavourite(index) {
+            if (this.bookmarks[index].favourite == false) {
+                this.bookmarks[index].favourite  = true;
+                this.putFavourite(index)
+            } else {
+                this.bookmarks[index].favourite  = false;
+                this.removeFavourite(index);
+            }
         },
-        putInFavourite(index) {
-      
-      if (this.bookmarks[index].favourite == false) {
-        this.bookmarks[index].favourite  = true;
-        this.setFavourite(index)
-      } else {
-        this.bookmarks[index].favourite  = false;
-        this.removeFavourite(index);
-      }
-    },
     }
 }
 
@@ -117,9 +93,13 @@ export default {
     <h1 class="title-1 fw-bold txt-blue" style="text-align: center;">Mes favoris</h1>
     <br>
 
+    <div class="Bookmarks">
+
+    <div v-if="bookmarks.length == 0" > <h1 class="title-1 fw-bold txt-blue" style="text-align: center;">Pas de favoris enregistré</h1></div>
+
      
 
-<div class="container-lg">
+<div  v-else class="container-lg ">
     <div class="row row-cols-4 ">
         <div id= "favoris"  class="card col col ms-3"
             style="width: 300px" v-for="(item,index) in this.bookmarks">
@@ -160,7 +140,7 @@ export default {
 
                 <div v-if="item.favourite">
                 <svg
-                    @click="putInFavourite(index)"
+                    @click="setFavourite(index)"
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="20"
@@ -179,7 +159,7 @@ export default {
 
                 <div v-else>
                 <svg
-                    @click="putInFavourite(index)"
+                    @click="setFavourite(index)"
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="20"
@@ -205,6 +185,7 @@ export default {
 
     </div>
 </div>
+</div>
     
     <!-- <button @click="test()">test </button> -->
     
@@ -218,6 +199,10 @@ export default {
 display: flex;
 text-align: center;
 justify-content: center;
+}
+
+.Bookmarks {
+    padding-bottom: 30%;
 }
 
 
