@@ -1,11 +1,30 @@
 <script>
+import SimpleText from './SimpleText.vue';
+import MultipleChoice from "./MultipleChoice.vue";
 
 
 export default {
+    components: { SimpleText,MultipleChoice },
     props: {
-        enonce: "",
-        responses:Array,
+        enoncé: String,
+        type: String,
+        isActive: Boolean,
+        responses: Array,
+        responsesPossibles: Array,
+        editable: Boolean
+    },
+    data(){
+        return {
+            message: "",
+            radio: "",
+
+        }
+    },
+    methods:{
+
+
     }
+    
 }
 
 </script>
@@ -14,18 +33,12 @@ export default {
 <template>
 <div class="mh-auto mw-auto d-flex align-items-center" id="page">
     <div class="container-lg">
-        <h2 class="text-white mb-5">{{this.enonce}}</h2>
+        <h2 class="text-white mb-5">{{this.enoncé}}</h2>
 
-        <textarea class="form-control mb-5 w-50" placeholder="Ecrivez votre réponse ici..." ></textarea>
+        <component :is="type" :responses="responses" :responsesPossibles="responses" :editable="editable"></component>
         
-        <div class="row col w-25 ms-1 mb-5">
-            <!-- Insérer les boutons ici et mettre du margin bottom-->
-            <button class="btn btn-outline-light w-10 mb-3">Oui</button>
-            <button class="btn btn-outline-light">Non</button>
-        </div>
-
         <div class="d-flex justify-content-end">
-            <button class="btn btn-outline-light btn-lg">OK</button>
+            <button @click="(event) => this.$emit('clickBtn',event)" class="btn btn-outline-light btn-lg">OK</button>
         </div>
     </div>
 

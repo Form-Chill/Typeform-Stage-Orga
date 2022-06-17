@@ -4,12 +4,12 @@
     <div id="apercu" class="card mw-100 mh-100">
         <div class="class-body " >
             <div class="col-md-8 bbbb">
-                <p class="card-text enonce"><b>{{this.enoncé}}</b></p>
+                <p class="card-text enonce text-light"><b>{{this.enoncé}}</b></p>
             </div>
-            <div class="component">
-                <component class="d-flex flex-column my-2" :is="type" :responses="responses"></component>
+            <div class="col-md-12 component">
+            <component :is="type" :responses="responses" :responsesPossibles="responses" :editable="editable"></component>
             </div>
-            <a class="btn btn-primary float-end mx-5 bouton blue" >OK</a>
+            <a class="btn btn-outline-light btn-lg float-end mx-5 bouton " >OK</a>
             
         </div>
         
@@ -22,7 +22,6 @@
 
 
 <script>
-import { ref } from 'vue'
 import MultipleChoice from "./MultipleChoice.vue"
 import SimpleText from './SimpleText.vue'
 
@@ -34,22 +33,16 @@ props: {
      enoncé: String,
      type:String,
      isActive: Boolean,
-     responses: Array
+     responses: Array,
+     responsesPossibles: Array,
+     editable: Boolean
 },
 data(){
     return{
-        message: ref(""),
-        radio: ref(""),
+        message: "",
+        radio: "",
     }
 },
-created(){
-
-
-},
-
-methods:{
-}
-
 }
 </script>
 
@@ -72,7 +65,7 @@ methods:{
 
 #apercu{
     margin: auto;
-    background-color: #D9D9D9;
+    background-color: grey;
     font-size: large;
     /* padding-block: 10%; */
 } 

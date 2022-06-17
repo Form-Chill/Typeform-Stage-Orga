@@ -1,12 +1,5 @@
 <template>
-
-    <div class="btn-group">
-        <div class="input">
-            <input placeholder="Une réponse" v-model="title">
-
-        </div>
-    </div>
-    
+    <textarea v-model="responses[0]" class="form-control mb-5 w-50" placeholder="Ecrivez votre réponse ici..." ></textarea>
 </template>
 
 
@@ -15,11 +8,12 @@
 export default{
 
     props: {
-        responses: []
+        responses: [],
+    },
+
+    mounted(){
+        this.responses.splice(0,this.responses.length);
+        this.responses.push("");
     }
-
-    
-
-
 }
 </script>

@@ -9,8 +9,10 @@ export default {
 
 <template>
   <Navbar />
+
+  <div class="MarketplaceVue">
   <br />
-  <h2 class="fw-bold txt-blue" style="text-align: center">Rechercher un sondage :</h2>
+  <h2 class="fw-bold txt-blue" style="text-align: center">Rechercher un sondage (WIP) :</h2>
 
   <br />
 
@@ -18,7 +20,7 @@ export default {
     <input
       type="text"
       class="form-control"
-      placeholder="Rechercher un sondage"
+      placeholder="Rechercher un sondage (WIP)"
       aria-label="Recipient's username"
       aria-describedby="button-addon2"
     />
@@ -36,6 +38,7 @@ export default {
   </div>
 
   <br />
+  </div>
   <Footer />
 </template>
 
@@ -44,5 +47,10 @@ export default {
   display: flex;
   text-align: center;
   justify-content: center;
+}
+
+
+.MarketplaceVue{
+  padding-bottom: 15%;
 }
 </style>

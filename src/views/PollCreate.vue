@@ -74,7 +74,6 @@ export default {
         alert("Le texte est vide");
       else{
         this.listQuestions[this.indexActive].responses.push(textRadio);
-        this.textRadio = "";
       }
     },
     async createPoll(){
@@ -112,7 +111,6 @@ export default {
 
   <!-- Menu -->
   <div class="toolbox row justify-content-center">
-
     <div class="col-md-4 col-sm-12">
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle blue" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="true">
@@ -151,7 +149,7 @@ export default {
           <button @click="addBtnRadio(textRadio)" class="btn btn-success btn-sm text-center ms-2">Valider</button>
         </div>
 
-        <Question v-bind="listQuestions[index]"></Question> 
+        <Question v-bind="listQuestions[index]" :editable="true"></Question> 
       </div>
     </div>
 
@@ -172,7 +170,7 @@ export default {
       
 
     <div class="container-lg justify-content-end">
-      <div class="">
+      <div class="float-end">
         <button @click="createPoll()" class="btn btn-lg btn-success">Valider la création</button>
         <input @click="setMarketplace()" type="checkbox" name="isMarketplaceAllowed" value="false" class="ms-2"> Poster sur le marketplace ?
       </div>
@@ -193,10 +191,6 @@ export default {
   padding-block: 1%;
 
 
-}
-
-.page-item{
-  background-color: blanchedalmond !important;
 }
 
 

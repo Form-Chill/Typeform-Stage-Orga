@@ -109,7 +109,7 @@ export default {
       <div class="Poll card col col ms-3" v-for="(item,index) in this.myPolls" style="width: 300px">
         <div class="card-body">
           <button type="button" class="btn-close" data-bs-toggle="modal" :data-bs-target="'#modalSup' + index"
-            aria-label="Close"></button>
+            aria-label="Close" style="float:right"></button>
           <h5 class="card-title">{{ item.title }}</h5>
           <p class="card-text">{{ description }}</p>
           <p class="card-text">

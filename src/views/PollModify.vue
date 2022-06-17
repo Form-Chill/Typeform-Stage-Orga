@@ -70,7 +70,6 @@ export default {
         alert("Le texte est vide");
       else{
         this.listQuestions[this.indexActive].responses.push(textRadio);
-        this.radio = "";
       }
     },
     async updatePoll(){
@@ -96,7 +95,6 @@ export default {
 
   <!-- Menu -->
   <div class="toolbox row justify-content-center">
-
     <div class="col-md-4 col-sm-12 ">
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle blue" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="true">
@@ -110,12 +108,12 @@ export default {
     </div>
 
     <div class="col-md-4 col-xs-12">
-      <input  placeholder="Nom du sondage" v-model="title">
+      <input type="text" class="form-control" placeholder="Nom du sondage" v-model="title">
     </div>
 
     <div class="col-md-4 col-xs-12">
-      <button @click="addQuestion('SimpleText')" class="btn btn-primary blue" >Ajouter une question</button>
-      <button @click="removeQuestion(indexActive)" v-if="this.listQuestions.length > 1" class="btn btn-primary blue" >Supprimer la question</button>
+      <button @click="addQuestion('SimpleText')" class="btn" style="background-color: #022C4F; color:white;" >Ajouter une question</button>
+      <button @click="removeQuestion(indexActive)" v-if="this.listQuestions.length > 1" class="btn btn-danger" >Supprimer la question</button>
     </div>
 
   </div>
@@ -123,41 +121,48 @@ export default {
   <br> 
 
    <!-- Affichage de la Question active du Sondage -->
+    <div class="container-lg">
     <div v-for="(item,index) in this.listQuestions">
       <div v-if="index == indexActive">
         <label>Texte enoncé:</label><br>  
-        <input  v-model="listQuestions[index].enoncé">
+        <input class="form-control mb-3" v-model="listQuestions[index].enoncé" placeholder="Ecrivez votre question ici">
        
-        <div v-show= "listQuestions[index].type == 'MultipleChoice'">
-          <label>Texte radio bouton:</label><br>  
+        <div v-show= "listQuestions[index].type == 'MultipleChoice'" class="mb-3">
+          <label>Texte des réponses possibles :</label><br> 
           <input v-model="textRadio">
-          <button @click="addBtnRadio(textRadio)" class="btn btn-success text-center">Valider</button>
+          <button @click="addBtnRadio(textRadio)" class="btn btn-success btn-sm text-center ms-2">Valider</button>
         </div>
 
-        <Question v-bind="listQuestions[index]"></Question> 
+        <Question v-bind="listQuestions[index]" :editable="true" ></Question> 
       </div>
     </div>
 
     <br> 
 
      <!--Pagination-->
-     
-    <div class="row">
-      <div class="col-md-3 offset-md-4 col-xs-12 overflow-auto">
-        <nav aria-label="Page navigation example">
+
+     <div class="col-md-3 offset-md-4 col-xs-12 overflow-auto">
+        <nav aria-label="Page navigation example" class="justify-content-center">
           <ul class="pagination">
           <div id="navigationQuestions" class="" v-for="(item,index) in this.listQuestions" >
-            <li class="page-item " @click="currentQuestion(index)"><a class="page-link blue text-light"> {{index}} </a></li>
+            <li class="page-item " @click="currentQuestion(index)">
+              <a class="page-link blue text-light"> {{index}} </a>
+            </li>
           </div>
           </ul>
         </nav>
       </div>
+      
 
-      <div class="col-md-3 offset-md-2 col-sm-12 ">
-        <button @click="updatePoll()" class="btn btn-success blue">Valider la modfication</button>
-      </div> 
+    <div class="container-lg justify-content-end">
+      <div class="float-end">
+        <button @click="updatePoll()" class="btn btn-lg btn-success">Valider la modification</button>
+      </div>
     </div>
+      
+   </div>
 </template>
+
 
 
 
@@ -168,15 +173,5 @@ export default {
   width: inherit;
   padding-block: 1%;
 }
-
-.page-item{
-  background-color: blanchedalmond !important;
-}
-
-.textenoncé{
-  
-
-}
-
 
 </style>
