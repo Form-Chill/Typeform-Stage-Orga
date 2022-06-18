@@ -37,7 +37,7 @@ export default {
       const querySnapshot = await getDocs(requete);
       querySnapshot.forEach((doc) => {
         let favourite = this.bookmarksID.includes(doc.id)?true:false;
-        this.myPolls.push(Object.assign(doc.data(),{id :doc.id, url : "localhost:3000/answer?id=" + doc.id,favourite : favourite,urlModify: "/PollModify?id=" + doc.id  }));
+        this.myPolls.push(Object.assign(doc.data(),{id :doc.id, url : "https://formandchill.web.app/answer?id=" + doc.id,favourite : favourite,urlModify: "/PollModify?id=" + doc.id  }));
       });
     },
 
