@@ -44,7 +44,7 @@ export default {
                 const docRef2 = doc(db,"polls",element);
                 const docSnap2 = await getDoc(docRef2);
                 if (docSnap.exists()) {
-                    const object = Object.assign(docSnap2.data(),{id : element,favourite: ref(true),url : "localhost:3000/answer?id=" + element });
+                    const object = Object.assign(docSnap2.data(),{id : element,favourite: ref(true),url : "https://formandchill.web.app/answer?id=" + element });
                     this.bookmarks.push(object);
                     console.log("Document data2:",this.bookmarks[0]); }
                 else {
