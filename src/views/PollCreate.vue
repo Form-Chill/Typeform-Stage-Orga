@@ -74,6 +74,7 @@ export default {
         alert("Le texte est vide");
       else{
         this.listQuestions[this.indexActive].responses.push(textRadio);
+        this.textRadio = "";
       }
     },
     async createPoll(){

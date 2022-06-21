@@ -74,10 +74,6 @@ export default {
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <router-link to="/" class="nav-link active text-light ps-4">Accueil</router-link>
-            </li>
-            
             
             <div v-if="loggedIn" >
               <li class="nav-item">

@@ -50,7 +50,7 @@
       <img src="../assets/avatar_3.png" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title fw-bold txt-blue">Thomas Métayer-Perez</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text">Développeur web FullStack</p>
       </div>
     </div>
   </div>
@@ -59,7 +59,7 @@
       <img src="../assets/avatar_1.png" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title fw-bold txt-blue">Anthony Buval</h5>
-        <p class="card-text">Développeur FullStack</p>
+        <p class="card-text">Développeur web FullStack</p>
       </div>
     </div>
   </div>

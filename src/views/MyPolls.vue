@@ -110,6 +110,7 @@ export default {
         <div class="card-body">
           <button type="button" class="btn-close" data-bs-toggle="modal" :data-bs-target="'#modalSup' + index"
             aria-label="Close" style="float:right"></button>
+            <br>
           <h5 class="card-title">{{ item.title }}</h5>
           <p class="card-text">{{ description }}</p>
           <p class="card-text">
@@ -118,7 +119,7 @@ export default {
           <div id="icons" style="display: flex; float: right">
             <!-- Faire fonctionner les popovers -->
 
-            <div>
+            <div class="mx-1">
               <Popper :content="'Partagez le sondage avec ce lien: ' + item.url" placement="right">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                   class="bi bi-share-fill" data-bs-toggle="popover" title="Popover title" data-bs-placement="right"

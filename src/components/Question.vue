@@ -6,8 +6,8 @@
             <div class="col-md-8 bbbb">
                 <p class="card-text enonce text-light"><b>{{this.enoncé}}</b></p>
             </div>
-            <div class="col-md-12 component">
-            <component :is="type" :responses="responses" :responsesPossibles="responses" :editable="editable"></component>
+            <div class="component">
+                <component class="row row-cols-2" :is="type" :responses="responses" :responsesPossibles="responses" :editable="editable"></component>
             </div>
             <a class="btn btn-outline-light btn-lg float-end mx-5 bouton " >OK</a>
             
